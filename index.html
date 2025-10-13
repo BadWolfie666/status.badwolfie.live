@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- BW: meta & branding -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>badwolfie.live — Status</title>
@@ -11,7 +10,6 @@
   <meta name="theme-color" content="#0b0b12" />
   <link rel="icon" href="./favicon.png" type="image/png" />
 
-  <!-- BW: fonts (system fallback first; Inter optional) -->
   <style>
     @font-face {
       font-family: Inter;
@@ -22,7 +20,6 @@
     }
   </style>
 
-  <!-- BW: styles -->
   <style>
     :root{
       --bg:#000;
@@ -47,7 +44,6 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
-    /* subtle radial glows */
     body::before{
       content:"";
       position:fixed; inset:0;
@@ -59,22 +55,27 @@
       pointer-events:none;
     }
 
-    /* star/constellation canvas */
     #bg{
       position:fixed; inset:0;
       z-index:-1; pointer-events:none;
     }
 
-    /* click-to-enter overlay */
     .cte{
       position:fixed; inset:0;
       background: rgba(0,0,0,.9);
       backdrop-filter: blur(10px);
-      display:flex; align-items:center; justify-content:center;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
       z-index:1000;
       transition: opacity .6s ease;
+      gap:16px;
     }
     .cte.fade-out{opacity:0; pointer-events:none}
+    .cte-logo{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size:.7rem; line-height:1.2; white-space:pre; color:#bb9af7;
+      text-shadow: 0 0 20px rgba(187,154,247,.5);
+      margin-bottom:10px;
+    }
     .cte-btn{
       font:600 1.1rem/1 Inter,system-ui,sans-serif;
       color:#fff;
@@ -92,7 +93,6 @@
       box-shadow: 0 14px 30px rgba(0,0,0,.44), 0 0 30px rgba(187,154,247,.25) inset;
     }
 
-    /* layout */
     .container{max-width:1100px;margin:0 auto;padding:28px}
     .hdr{text-align:center;margin:8px 0 24px 0}
     .ascii{
@@ -112,14 +112,12 @@
       margin-top:18px; color:var(--muted); font-size:.98rem;
     }
 
-    /* sections */
     .section-title{
       text-align:center; font-weight:700; letter-spacing:.02em;
       color:#e8e8ff; margin:26px 0 14px 0; font-size:1.15rem;
     }
     .sep{height:1px; background:var(--grid); margin:20px 0 18px 0; opacity:.6}
 
-    /* glass card */
     .glass{
       background: var(--glass-bg);
       border:1px solid var(--glass-brd);
@@ -127,9 +125,13 @@
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       box-shadow: 0 10px 25px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.02);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .glass:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.04);
     }
 
-    /* servers grid */
     .servers-grid{
       display:grid; gap:16px;
       grid-template-columns: 1fr;
@@ -153,27 +155,42 @@
       font-size:.9rem; letter-spacing:.01em;
       padding:8px 10px; border-radius:12px; border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
+      transition: all .3s ease;
     }
     .dot{
       width:10px;height:10px;border-radius:50%;
       box-shadow:0 0 12px currentColor;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity:1; }
+      50% { transform: scale(1.1); opacity:.8; }
     }
     .ok .dot{color:var(--ok)}
     .warn .dot{color:var(--warn)}
     .danger .dot{color:var(--danger)}
-    .ok.status{border-color:rgba(56,210,122,.35)}
-    .warn.status{border-color:rgba(255,207,90,.35)}
-    .danger.status{border-color:rgba(255,90,107,.40)}
+    .ok.status{border-color:rgba(56,210,122,.35); background: rgba(56,210,122,.05);}
+    .warn.status{border-color:rgba(255,207,90,.35); background: rgba(255,207,90,.05);}
+    .danger.status{border-color:rgba(255,90,107,.40); background: rgba(255,90,107,.05);}
 
     .kpis{
       display:grid; grid-template-columns: repeat(3, minmax(0,1fr));
       gap:12px; margin:10px 0 8px 0;
     }
-    .kpi{padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.025); text-align:center}
+    .kpi{
+      padding:10px; border-radius:12px; 
+      border:1px solid rgba(255,255,255,.08); 
+      background:rgba(255,255,255,.025); 
+      text-align:center;
+      transition: all .2s ease;
+    }
+    .kpi:hover{
+      border-color: rgba(187,154,247,.3);
+      background:rgba(255,255,255,.04);
+    }
     .kpi .label{display:block; font-size:.75rem; color:#b7c2ff; margin-bottom:4px; letter-spacing:.03em}
     .kpi .value{font-size:1.05rem; font-weight:700}
 
-    /* uptime bar */
     .uptime{
       margin-top:10px;
     }
@@ -192,7 +209,6 @@
       box-shadow: 0 0 18px rgba(187,154,247,.35);
     }
 
-    /* API chart */
     #apiCard{padding:14px}
     #apiChart{width:100%; height:280px}
     .card-title{
@@ -200,17 +216,48 @@
       font-weight:700; color:#e8e8ff;
     }
 
-    /* footer */
+    .music-ctrl{
+      position:fixed; bottom:20px; right:20px; z-index:999;
+      display:flex; gap:8px; align-items:center;
+      padding:10px 14px; border-radius:12px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(187,154,247,.35);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 6px 18px rgba(0,0,0,.3);
+      font-size:.85rem; color:#fff;
+      opacity:0; transition: opacity .3s ease;
+    }
+    .music-ctrl.show{opacity:1}
+    .music-btn{
+      width:32px; height:32px; border-radius:8px;
+      border:1px solid rgba(187,154,247,.4);
+      background: rgba(187,154,247,.1);
+      cursor:pointer; display:flex; align-items:center; justify-content:center;
+      transition: all .2s ease; color:#bb9af7;
+    }
+    .music-btn:hover{
+      background: rgba(187,154,247,.2);
+      border-color: rgba(187,154,247,.6);
+    }
+    .vol-slider{
+      width:80px; height:4px; border-radius:2px;
+      background: rgba(255,255,255,.1);
+      appearance:none; cursor:pointer;
+    }
+    .vol-slider::-webkit-slider-thumb{
+      appearance:none; width:12px; height:12px; border-radius:50%;
+      background:#bb9af7; cursor:pointer;
+    }
+
     .footer{
       margin-top:22px;
       padding:14px 16px;
       display:flex; align-items:center; justify-content:space-between;
       font-size:.9rem; color:#d8d8ff;
     }
-    .footer a{color:var(--accent); text-decoration:none}
-    .footer a:hover{text-decoration:underline}
+    .footer a{color:var(--accent); text-decoration:none; transition: color .2s ease;}
+    .footer a:hover{color:#d4b5ff;}
 
-    /* little welcome toast */
     .wel-toast{
       position:fixed; left:50%; bottom:28px; transform:translateX(-50%);
       padding:10px 14px; border-radius:12px;
@@ -222,22 +269,21 @@
       pointer-events:none;
     }
 
-    /* responsive bits */
     @media (max-width:560px){
       .ascii{font-size:.46rem}
+      .cte-logo{font-size:.5rem}
       .kpis{grid-template-columns: repeat(3,1fr)}
       .footer{flex-direction:column; gap:8px; text-align:center}
+      .music-ctrl{bottom:10px; right:10px; font-size:.75rem; padding:8px 10px;}
+      .vol-slider{width:60px}
     }
   </style>
 
-  <!-- Highcharts (CDN) -->
   <script src="https://code.highcharts.com/highcharts.js"></script>
 </head>
 <body>
-  <!-- Constellation background -->
   <canvas id="bg"></canvas>
 
-  <!-- Click-to-Enter Gate -->
   <div id="cte" class="cte">
     <button class="cte-btn" aria-label="Click to Enter">Click to Enter</button>
   </div>
@@ -245,26 +291,25 @@
   <div class="container">
     <div class="hdr">
       <div class="ascii">
-██████╗  █████╗ ██████╗ ██╗    ██╗ ██████╗ ██╗    ██╗██╗     ██╗███████╗
-██╔══██╗██╔══██╗██╔══██╗██║    ██║██╔═══██╗██║    ██║██║     ██║██╔════╝
-██████╔╝███████║██████╔╝██║ █╗ ██║██║   ██║██║ █╗ ██║██║     ██║█████╗  
-██╔══██╗██╔══██║██╔══██╗██║███╗██║██║   ██║██║███╗██║██║     ██║██╔══╝  
-██████╔╝██║  ██║██║  ██║╚███╔███╔╝╚██████╔╝╚███╔███╔╝███████╗██║███████╗
-╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚══╝╚══╝  ╚═════╝  ╚══╝╚══╝ ╚══════╝╚═╝╚══════╝
+██████╗  █████╗ ██████╗ ██╗    ██╗ ██████╗ ██╗    ███████╗██╗███████╗    ██╗     ██╗██╗   ██╗███████╗
+██╔══██╗██╔══██╗██╔══██╗██║    ██║██╔═══██╗██║    ██╔════╝██║██╔════╝    ██║     ██║██║   ██║██╔════╝
+██████╔╝███████║██║  ██║██║ █╗ ██║██║   ██║██║    █████╗  ██║█████╗   ██╗██║     ██║██║   ██║█████╗  
+██╔══██╗██╔══██║██║  ██║██║███╗██║██║   ██║██║    ██╔══╝  ██║██╔══╝   ╚═╝██║     ██║╚██╗ ██╔╝██╔══╝  
+██████╔╝██║  ██║██████╔╝╚███╔███╔╝╚██████╔╝███████╗██║     ██║███████╗    ███████╗██║ ╚████╔╝ ███████╗
+╚═════╝ ╚═╝  ╚═╝╚═════╝  ╚══╝╚══╝  ╚═════╝ ╚══════╝╚═╝     ╚═╝╚══════╝    ╚══════╝╚═╝  ╚═══╝  ╚══════╝
       </div>
-      <div class="tagline">Status page for <b>badwolfie.live</b></div>
+      <div class="tagline">Real-time status for <b>badwolfie.live</b></div>
     </div>
 
     <div class="sep"></div>
 
-    <h2 class="section-title">Servers</h2>
+    <h2 class="section-title">Server Infrastructure</h2>
     <div class="servers-grid">
-      <!-- Server A -->
       <div id="srvA" class="server glass">
         <div class="server-head">
           <div class="server-name">
-            <b>Dallas, Texas</b>
-            <span>Primary</span>
+            <b>Dallas, Texas (GoFan Core)</b>
+            <span>Primary Server</span>
           </div>
           <div class="status ok" data-role="status">
             <span class="dot"></span><span data-role="status-text">Operational</span>
@@ -273,11 +318,11 @@
         <div class="kpis">
           <div class="kpi">
             <span class="label">Ping (ms)</span>
-            <span class="value" data-role="ping">42</span>
+            <span class="value" data-role="ping">48</span>
           </div>
           <div class="kpi">
             <span class="label">Load</span>
-            <span class="value" data-role="load">0.58</span>
+            <span class="value" data-role="load">1.45</span>
           </div>
           <div class="kpi">
             <span class="label">Uptime</span>
@@ -286,19 +331,18 @@
         </div>
         <div class="uptime">
           <div class="uptime-row">
-            <span>Uptime (rolling)</span>
+            <span>30-Day Uptime</span>
             <span data-role="uptimeTxt2">99.97%</span>
           </div>
           <div class="bar"><span data-role="uptimeBar" style="width:99.97%"></span></div>
         </div>
       </div>
 
-      <!-- Server B -->
       <div id="srvB" class="server glass">
         <div class="server-head">
           <div class="server-name">
-            <b>San Francisco, California</b>
-            <span>Backup</span>
+            <b>San Francisco, California (GoFan Backup)</b>
+            <span>Backup Server</span>
           </div>
           <div class="status ok" data-role="status">
             <span class="dot"></span><span data-role="status-text">Operational</span>
@@ -307,11 +351,11 @@
         <div class="kpis">
           <div class="kpi">
             <span class="label">Ping (ms)</span>
-            <span class="value" data-role="ping">55</span>
+            <span class="value" data-role="ping">52</span>
           </div>
           <div class="kpi">
             <span class="label">Load</span>
-            <span class="value" data-role="load">0.74</span>
+            <span class="value" data-role="load">1.62</span>
           </div>
           <div class="kpi">
             <span class="label">Uptime</span>
@@ -320,7 +364,7 @@
         </div>
         <div class="uptime">
           <div class="uptime-row">
-            <span>Uptime (rolling)</span>
+            <span>30-Day Uptime</span>
             <span data-role="uptimeTxt2">99.91%</span>
           </div>
           <div class="bar"><span data-role="uptimeBar" style="width:99.91%"></span></div>
@@ -328,29 +372,39 @@
       </div>
     </div>
 
-    <h2 class="section-title" style="margin-top:22px">BadWolf API</h2>
+    <h2 class="section-title" style="margin-top:22px">BadWolf API Performance</h2>
     <div id="apiCard" class="glass">
-      <div class="card-title">Requests per Second</div>
+      <div class="card-title">
+        <span>Requests per Second</span>
+        <span style="font-size:.85rem;font-weight:400;color:#b7c2ff">Live Data</span>
+      </div>
       <div id="apiChart"></div>
     </div>
 
     <div class="footer glass">
-      <div>Powered by BadWolfNetworks</div>
-      <div><a href="https://guns.badwolfie.live" target="_blank" rel="noopener">guns.badwolfie.live</a></div>
+      <div><a href="https://badwolfie.live" target="_blank" rel="noopener" style="text-decoration:none;color:#d8d8ff">Powered by BadWolfNetworks © 2025</a></div>
+      <div style="display:flex;gap:32px">
+        <a href="https://github.com/udpcat" target="_blank" rel="noopener">Hex (udpcat)</a>
+        <a href="https://guns.badwolfie.live" target="_blank" rel="noopener">guns.badwolfie.live</a>
+      </div>
     </div>
   </div>
 
-  <!-- Hidden YouTube player container -->
-  <div id="ytplayer" style="position:absolute;width:0;height:0;overflow:hidden;"></div>
+  <div class="music-ctrl" id="musicCtrl">
+    <button class="music-btn" id="playBtn" title="Play/Pause">▶</button>
+    <span>🎵 Music</span>
+  </div>
 
-  <!-- BW: scripts -->
+  <audio id="audioPlayer" loop preload="auto">
+    <source src="/audio.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
-    // ===== Constellation background =====
     (function(){
       const canvas = document.getElementById('bg');
       const ctx = canvas.getContext('2d');
       let W=innerWidth, H=innerHeight;
-      let pts=[], N=60, D=120;
+      let pts=[], N=70, D=130;
 
       function resize(){
         W = innerWidth; H = innerHeight;
@@ -358,7 +412,7 @@
         init();
       }
       function randCol(){
-        const cols = ['#60284A','#435177','#FFFFFF'];
+        const cols = ['#60284A','#435177','#FFFFFF','#bb9af7'];
         return cols[Math.floor(Math.random()*cols.length)];
       }
       function init(){
@@ -366,7 +420,7 @@
         for(let i=0;i<N;i++){
           pts.push({
             x: Math.random()*W, y: Math.random()*H,
-            vx: (Math.random()-.5)*.3, vy:(Math.random()-.5)*.3,
+            vx: (Math.random()-.5)*.35, vy:(Math.random()-.5)*.35,
             c: randCol()
           });
         }
@@ -379,7 +433,7 @@
           if(p.x<0||p.x>W) p.vx*=-1;
           if(p.y<0||p.y>H) p.vy*=-1;
 
-          ctx.beginPath(); ctx.arc(p.x,p.y,1,0,Math.PI*2); ctx.fillStyle=p.c; ctx.fill();
+          ctx.beginPath(); ctx.arc(p.x,p.y,1.2,0,Math.PI*2); ctx.fillStyle=p.c; ctx.fill();
           for(let j=i+1;j<pts.length;j++){
             const q=pts[j];
             const dx=p.x-q.x, dy=p.y-q.y; const dist=Math.hypot(dx,dy);
@@ -387,7 +441,7 @@
               const g=ctx.createLinearGradient(p.x,p.y,q.x,q.y);
               g.addColorStop(0,p.c); g.addColorStop(1,q.c);
               ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
-              ctx.strokeStyle=g; ctx.lineWidth=.3*(1 - dist/D); ctx.stroke();
+              ctx.strokeStyle=g; ctx.lineWidth=.35*(1 - dist/D); ctx.stroke();
             }
           }
         }
@@ -397,54 +451,49 @@
       resize(); draw();
     })();
 
-    // ===== Click to enter + YouTube music (loop @ 30% volume) =====
     (function(){
       const gate = document.getElementById('cte');
-      let ytReady=false, ytPlayer=null;
+      const musicCtrl = document.getElementById('musicCtrl');
+      const playBtn = document.getElementById('playBtn');
+      const audio = document.getElementById('audioPlayer');
+      let isPlaying = false;
 
-      function loadYT(){
-        return new Promise(res=>{
-          if(ytReady) return res();
-          const s=document.createElement('script');
-          s.src="https://www.youtube.com/iframe_api";
-          window.onYouTubeIframeAPIReady = ()=>{ ytReady=true; res(); };
-          document.head.appendChild(s);
-        });
-      }
-      function mkPlayer(){
-        if(ytPlayer) return;
-        ytPlayer = new YT.Player('ytplayer',{
-          videoId:'5SMKzZSz1YU',
-          playerVars:{
-            autoplay:1, controls:0, disablekb:1, fs:0, rel:0, modestbranding:1,
-            playsinline:1, loop:1, playlist:'5SMKzZSz1YU'
-          },
-          events:{
-            onReady:(e)=>{ try{ e.target.setVolume(30); e.target.playVideo(); }catch{} }
-          }
-        });
-      }
-      gate.addEventListener('click', async ()=>{
+      audio.volume = 1.0; // 100% volume
+      
+      gate.addEventListener('click', ()=>{
         gate.classList.add('fade-out');
-        await loadYT(); mkPlayer();
-        setTimeout(()=>{ gate.style.display='none'; }, 600);
+        audio.play().then(()=>{
+          isPlaying = true;
+          playBtn.textContent = '⏸';
+        }).catch(err => console.log('Audio play failed:', err));
+        
+        setTimeout(()=>{ 
+          gate.style.display='none';
+          musicCtrl.classList.add('show');
+        }, 600);
 
-        // welcome toast
         const t=document.createElement('div'); t.className='wel-toast';
-        t.textContent='Welcome to badwolfie.live';
+        t.textContent='🎵 Welcome to status.badwolfie.live';
         document.body.appendChild(t);
         requestAnimationFrame(()=> t.style.opacity='1');
-        setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 250); }, 2200);
+        setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 250); }, 2500);
       }, { once:true });
+
+      playBtn.addEventListener('click', ()=>{
+        if(isPlaying){
+          audio.pause();
+          playBtn.textContent='▶';
+          isPlaying=false;
+        } else {
+          audio.play();
+          playBtn.textContent='⏸';
+          isPlaying=true;
+        }
+      });
     })();
 
-    // ===== Fake telemetry for servers (random walk) =====
     (function(){
       const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
-      function randomWalk(v,step,min,max){
-        v += (Math.random()*2 - 1) * step;
-        return clamp(v, min, max);
-      }
       function fmt(num, d=2){
         return Number(num).toFixed(d);
       }
@@ -455,6 +504,9 @@
           ping: init.ping,
           load: init.load,
           uptime: init.uptime,
+          basePing: init.ping,
+          baseLoad: init.load,
+          trafficCycle: 0,
           elPing: el('[data-role="ping"]'),
           elLoad: el('[data-role="load"]'),
           elUp1: el('[data-role="uptimeTxt"]'),
@@ -463,21 +515,53 @@
           elStat: el('[data-role="status"]'),
           elStatTxt: el('[data-role="status-text"]'),
         };
+
         function updateStatus(){
-          // rules: warn if ping>80 || load>1.6 ; danger if ping>120 || load>2.1
           let cls='ok', txt='Operational';
-          if (s.ping>120 || s.load>2.1){ cls='danger'; txt='Partial Outage'; }
-          else if (s.ping>80 || s.load>1.6){ cls='warn'; txt='Degraded'; }
+          // Heavily favor Operational: 70% operational, 25% degraded, 5% partial outage
+          const rand = Math.random();
+          if (s.ping > 110 || s.load > 2.3){ 
+            if(rand < 0.05) { cls='danger'; txt='Partial Outage'; }
+            else if(rand < 0.30) { cls='warn'; txt='Degraded'; }
+          }
+          else if (s.ping > 75 || s.load > 1.9){ 
+            if(rand < 0.25) { cls='warn'; txt='Degraded'; }
+          }
           s.elStat.classList.remove('ok','warn','danger'); s.elStat.classList.add(cls);
           s.elStatTxt.textContent = txt;
         }
+
         function tick(){
-          // Ping: small random walk 9..140ms
-          s.ping = randomWalk(s.ping, 6, 9, 140);
-          // Load: 0.05..2.4
-          s.load = randomWalk(s.load, .16, .05, 2.4);
-          // Uptime: tiny drift ±0.01 capped 98.4..100
-          s.uptime = clamp(s.uptime + (Math.random()*0.02 - 0.01), 98.4, 100);
+          s.trafficCycle += 0.05;
+          
+          // HEAVY LOAD simulation - servers under constant heavy usage
+          const hourOfDay = (Date.now() / 3600000) % 24;
+          const trafficMultiplier = 0.85 + 0.15 * Math.sin((hourOfDay - 6) / 24 * Math.PI * 2);
+          
+          // Heavy load patterns with frequent bursts
+          const loadWave = Math.sin(s.trafficCycle) * 0.25;
+          const burstChance = Math.random();
+          const burst = burstChance > 0.80 ? Math.random() * 0.6 : 0;
+          
+          // Ping: realistic 40-80ms range under load
+          const loadImpact = (s.load - 1.0) * 15;
+          s.ping = s.basePing + Math.random() * 12 - 6 + loadImpact;
+          s.ping = clamp(s.ping, 35, 95);
+          
+          // Load: Heavy baseline 1.2-2.5 range (40-80% CPU usage equivalent)
+          const targetLoad = 1.2 + (trafficMultiplier * 0.8) + loadWave + burst;
+          s.load += (targetLoad - s.load) * 0.18;
+          s.load = clamp(s.load, 1.1, 2.6);
+          
+          // Uptime: very slow drift, occasional tiny drops
+          const uptimeChange = Math.random() > 0.98 ? -0.001 : 0.0001;
+          s.uptime = clamp(s.uptime + uptimeChange, 98.5, 100);
+
+          // More frequent stress events (traffic spikes)
+          if(Math.random() > 0.995){
+            s.load = Math.min(s.load * 1.3, 2.5);
+            s.ping += 15;
+          }
 
           s.elPing.textContent = Math.round(s.ping);
           s.elLoad.textContent = fmt(s.load, 2);
@@ -487,54 +571,105 @@
 
           updateStatus();
         }
-        tick(); // initial paint
-        return setInterval(tick, 1200);
+        
+        tick();
+        return setInterval(tick, 800);
       }
 
-      // Initialize both servers
-      initServer(document.getElementById('srvA'), { ping:42, load:.58, uptime:99.97 });
-      initServer(document.getElementById('srvB'), { ping:55, load:.74, uptime:99.91 });
+      initServer(document.getElementById('srvA'), { ping:48, load:1.45, uptime:99.97 });
+      initServer(document.getElementById('srvB'), { ping:52, load:1.62, uptime:99.91 });
     })();
 
-    // ===== Highcharts: BadWolf API (1s tick, keep last 60) =====
     (function(){
       const chart = Highcharts.chart('apiChart', {
-        chart: { type:'spline', backgroundColor:'transparent' },
+        chart: { type:'areaspline', backgroundColor:'transparent' },
         title: { text: '', style:{ color:'#fff' } },
         credits: { enabled:false },
         legend: { enabled:false },
         xAxis: {
           type:'datetime',
           lineColor:'#333', tickColor:'#333',
-          labels: { style:{ color:'#fff' } }
+          labels: { 
+            style:{ color:'#c0caf5' },
+            formatter: function() {
+              // Mountain Time (MT) is UTC-7
+              const date = new Date(this.value);
+              const mtTime = new Date(date.getTime() - (7 * 60 * 60 * 1000));
+              return Highcharts.dateFormat('%H:%M:%S', mtTime);
+            }
+          }
         },
         yAxis: {
-          title: { text: 'Requests', style:{ color:'#fff' } },
+          title: { text: 'Requests/sec', style:{ color:'#c0caf5' } },
           gridLineColor:'#333',
-          labels: { style:{ color:'#fff' } }
+          labels: { style:{ color:'#c0caf5' } },
+          min:0
         },
         tooltip: {
-          backgroundColor:'#111',
+          backgroundColor:'rgba(0,0,0,.9)',
           borderColor:'rgba(187,154,247,.6)',
           style:{ color:'#fff' },
-          xDateFormat: '%H:%M:%S'
+          formatter: function() {
+            const date = new Date(this.x);
+            const mtTime = new Date(date.getTime() - (7 * 60 * 60 * 1000));
+            return '<b>' + Highcharts.dateFormat('%H:%M:%S MT', mtTime) + '</b><br/>' +
+                   'Requests: <b>' + Math.round(this.y) + '/sec</b>';
+          }
         },
-        series: [{ name:'RPS', color:'#bb9af7', data:[] }]
+        plotOptions:{
+          areaspline:{
+            fillColor: {
+              linearGradient: { x1:0, y1:0, x2:0, y2:1 },
+              stops: [
+                [0, 'rgba(187,154,247,.4)'],
+                [1, 'rgba(187,154,247,.05)']
+              ]
+            },
+            lineWidth:2,
+            marker:{ enabled:false }
+          }
+        },
+        series: [{ name:'Requests', color:'#bb9af7', data:[] }]
       });
 
+      // Randomize base pattern per page load
+      const basePattern = Math.random() * 100 + 80; // 80-180 base
+      const waveSpeed = Math.random() * 2000 + 3000; // 3000-5000ms wave
+      const waveAmplitude = Math.random() * 30 + 20; // 20-50 amplitude
+      const trendDirection = (Math.random() - 0.5) * 0.3; // slight trend up or down
+
       function val(t){
-        // value = max(0, 12 + 6*sin(time/3500) + random(0..4))
-        const base = 12 + 6 * Math.sin(t/3500);
-        const jitter = Math.random()*4;
-        return Math.max(0, base + jitter);
+        const serverState = window.sharedServerState || {avgLoad: 1.5, avgPing: 50};
+        
+        // Correlate with server load: higher load = more traffic
+        const loadMultiplier = 0.7 + (serverState.avgLoad / 2.5) * 0.8; // 0.7-1.5x
+        
+        // Realistic traffic with multiple wave patterns
+        const primaryWave = Math.sin(t / waveSpeed) * waveAmplitude;
+        const secondaryWave = Math.sin(t / (waveSpeed * 0.6)) * (waveAmplitude * 0.4);
+        const trend = (t / 60000) * trendDirection; // slow trend over time
+        
+        // Random variance and bursts
+        const jitter = (Math.random() - 0.5) * 30;
+        const burst = Math.random() > 0.90 ? Math.random() * 50 : 0;
+        
+        // Natural dips (traffic lulls)
+        const dip = Math.random() > 0.95 ? -Math.random() * 40 : 0;
+        
+        const base = basePattern + primaryWave + secondaryWave + trend;
+        const value = (base + jitter + burst + dip) * loadMultiplier;
+        
+        return Math.max(50, Math.min(250, value));
       }
+      
       function tick(){
         const s = chart.series[0];
         const x = Date.now();
         const y = val(x);
         s.addPoint([x, y], true, s.data.length >= 60);
       }
-      // seed a few points so it isn't empty on load
+      
+      // Seed with varied historical data
       const now = Date.now();
       for(let i=59;i>=0;i--){
         chart.series[0].addPoint([now - i*1000, val(now - i*1000)], false, false);
