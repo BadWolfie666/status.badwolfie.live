@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
   <title>badwolfie.live — Status</title>
   <meta property="og:title" content="badwolfie.live — Status" />
   <meta property="og:description" content="Status page for badwolfie.live" />
@@ -43,6 +43,7 @@
       position:relative;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
+      -webkit-tap-highlight-color: transparent;
     }
     body::before{
       content:"";
@@ -86,6 +87,8 @@
       box-shadow: 0 10px 24px rgba(0,0,0,.35), 0 0 24px rgba(187,154,247,.15) inset;
       cursor:pointer;
       transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
     .cte-btn:hover{
       transform: translateY(-2px);
@@ -234,6 +237,8 @@
       background: rgba(187,154,247,.1);
       cursor:pointer; display:flex; align-items:center; justify-content:center;
       transition: all .2s ease; color:#bb9af7;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
     .music-btn:hover{
       background: rgba(187,154,247,.2);
@@ -318,11 +323,11 @@
         <div class="kpis">
           <div class="kpi">
             <span class="label">Ping (ms)</span>
-            <span class="value" data-role="ping">48</span>
+            <span class="value" data-role="ping">55</span>
           </div>
           <div class="kpi">
             <span class="label">Load</span>
-            <span class="value" data-role="load">1.45</span>
+            <span class="value" data-role="load">1.78</span>
           </div>
           <div class="kpi">
             <span class="label">Uptime</span>
@@ -351,11 +356,11 @@
         <div class="kpis">
           <div class="kpi">
             <span class="label">Ping (ms)</span>
-            <span class="value" data-role="ping">52</span>
+            <span class="value" data-role="ping">61</span>
           </div>
           <div class="kpi">
             <span class="label">Load</span>
-            <span class="value" data-role="load">1.62</span>
+            <span class="value" data-role="load">1.92</span>
           </div>
           <div class="kpi">
             <span class="label">Uptime</span>
@@ -372,7 +377,7 @@
       </div>
     </div>
 
-    <h2 class="section-title" style="margin-top:22px">BadWolf API Performance</h2>
+    <h2 class="section-title" style="margin-top:22px">BadWolf API Performance (Simulated)</h2>
     <div id="apiCard" class="glass">
       <div class="card-title">
         <span>Requests per Second</span>
@@ -383,7 +388,7 @@
 
     <div class="footer glass">
       <div><a href="https://badwolfie.live" target="_blank" rel="noopener" style="text-decoration:none;color:#d8d8ff">Powered by BadWolfNetworks © 2025</a></div>
-      <div style="display:flex;gap:32px">
+      <div style="display:flex;gap:12px">
         <a href="https://github.com/udpcat" target="_blank" rel="noopener">Hex (udpcat)</a>
         <a href="https://guns.badwolfie.live" target="_blank" rel="noopener">guns.badwolfie.live</a>
       </div>
@@ -473,7 +478,7 @@
         }, 600);
 
         const t=document.createElement('div'); t.className='wel-toast';
-        t.textContent='🎵 Welcome to status.badwolfie.live';
+        t.textContent='🐺 Welcome to status.badwolfie.live';
         document.body.appendChild(t);
         requestAnimationFrame(()=> t.style.opacity='1');
         setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 250); }, 2500);
@@ -576,8 +581,8 @@
         return setInterval(tick, 800);
       }
 
-      initServer(document.getElementById('srvA'), { ping:48, load:1.45, uptime:99.97 });
-      initServer(document.getElementById('srvB'), { ping:52, load:1.62, uptime:99.91 });
+      initServer(document.getElementById('srvA'), { ping:55, load:1.78, uptime:99.97 });
+      initServer(document.getElementById('srvB'), { ping:61, load:1.92, uptime:99.91 });
     })();
 
     (function(){
@@ -592,10 +597,16 @@
           labels: { 
             style:{ color:'#c0caf5' },
             formatter: function() {
-              // Mountain Time (MT) is UTC-7
+              // Mountain Time (MT) is UTC-7, convert to 12-hour format
               const date = new Date(this.value);
               const mtTime = new Date(date.getTime() - (7 * 60 * 60 * 1000));
-              return Highcharts.dateFormat('%H:%M:%S', mtTime);
+              let hours = mtTime.getUTCHours();
+              const minutes = mtTime.getUTCMinutes();
+              const seconds = mtTime.getUTCSeconds();
+              const ampm = hours >= 12 ? 'PM' : 'AM';
+              hours = hours % 12 || 12;
+              const pad = (n) => String(n).padStart(2, '0');
+              return hours + ':' + pad(minutes) + ':' + pad(seconds) + ' ' + ampm;
             }
           }
         },
@@ -612,7 +623,14 @@
           formatter: function() {
             const date = new Date(this.x);
             const mtTime = new Date(date.getTime() - (7 * 60 * 60 * 1000));
-            return '<b>' + Highcharts.dateFormat('%H:%M:%S MT', mtTime) + '</b><br/>' +
+            let hours = mtTime.getUTCHours();
+            const minutes = mtTime.getUTCMinutes();
+            const seconds = mtTime.getUTCSeconds();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            const pad = (n) => String(n).padStart(2, '0');
+            const timeStr = hours + ':' + pad(minutes) + ':' + pad(seconds) + ' ' + ampm + ' MT';
+            return '<b>' + timeStr + '</b><br/>' +
                    'Requests: <b>' + Math.round(this.y) + '/sec</b>';
           }
         },
@@ -632,34 +650,13 @@
         series: [{ name:'Requests', color:'#bb9af7', data:[] }]
       });
 
-      // Randomize base pattern per page load
-      const basePattern = Math.random() * 100 + 80; // 80-180 base
-      const waveSpeed = Math.random() * 2000 + 3000; // 3000-5000ms wave
-      const waveAmplitude = Math.random() * 30 + 20; // 20-50 amplitude
-      const trendDirection = (Math.random() - 0.5) * 0.3; // slight trend up or down
-
       function val(t){
-        const serverState = window.sharedServerState || {avgLoad: 1.5, avgPing: 50};
-        
-        // Correlate with server load: higher load = more traffic
-        const loadMultiplier = 0.7 + (serverState.avgLoad / 2.5) * 0.8; // 0.7-1.5x
-        
-        // Realistic traffic with multiple wave patterns
-        const primaryWave = Math.sin(t / waveSpeed) * waveAmplitude;
-        const secondaryWave = Math.sin(t / (waveSpeed * 0.6)) * (waveAmplitude * 0.4);
-        const trend = (t / 60000) * trendDirection; // slow trend over time
-        
-        // Random variance and bursts
-        const jitter = (Math.random() - 0.5) * 30;
-        const burst = Math.random() > 0.90 ? Math.random() * 50 : 0;
-        
-        // Natural dips (traffic lulls)
-        const dip = Math.random() > 0.95 ? -Math.random() * 40 : 0;
-        
-        const base = basePattern + primaryWave + secondaryWave + trend;
-        const value = (base + jitter + burst + dip) * loadMultiplier;
-        
-        return Math.max(50, Math.min(250, value));
+        // Heavy API usage: 80-200 requests/sec with traffic patterns
+        const base = 120 + 40 * Math.sin(t/4500);
+        const wave = 20 * Math.sin(t/2000);
+        const jitter = Math.random() * 25;
+        const burst = Math.random() > 0.92 ? Math.random() * 35 : 0;
+        return Math.max(80, base + wave + jitter + burst);
       }
       
       function tick(){
