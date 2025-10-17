@@ -323,11 +323,11 @@
         <div class="kpis">
           <div class="kpi">
             <span class="label">Ping (ms)</span>
-            <span class="value" data-role="ping">55</span>
+            <span class="value" data-role="ping">52</span>
           </div>
           <div class="kpi">
             <span class="label">Load</span>
-            <span class="value" data-role="load">1.78</span>
+            <span class="value" data-role="load">64%</span>
           </div>
           <div class="kpi">
             <span class="label">Uptime</span>
@@ -356,11 +356,11 @@
         <div class="kpis">
           <div class="kpi">
             <span class="label">Ping (ms)</span>
-            <span class="value" data-role="ping">61</span>
+            <span class="value" data-role="ping">58</span>
           </div>
           <div class="kpi">
             <span class="label">Load</span>
-            <span class="value" data-role="load">1.92</span>
+            <span class="value" data-role="load">68%</span>
           </div>
           <div class="kpi">
             <span class="label">Uptime</span>
@@ -377,7 +377,7 @@
       </div>
     </div>
 
-    <h2 class="section-title" style="margin-top:22px">BadWolf API Performance (Simulated)</h2>
+    <h2 class="section-title" style="margin-top:22px">BadWolf API Performance</h2>
     <div id="apiCard" class="glass">
       <div class="card-title">
         <span>Requests per Second</span>
@@ -521,19 +521,11 @@
           elStatTxt: el('[data-role="status-text"]'),
         };
 
+        // ✅ Always show Operational only
         function updateStatus(){
-          let cls='ok', txt='Operational';
-          // Heavily favor Operational: 70% operational, 25% degraded, 5% partial outage
-          const rand = Math.random();
-          if (s.ping > 110 || s.load > 2.3){ 
-            if(rand < 0.05) { cls='danger'; txt='Partial Outage'; }
-            else if(rand < 0.30) { cls='warn'; txt='Degraded'; }
-          }
-          else if (s.ping > 75 || s.load > 1.9){ 
-            if(rand < 0.25) { cls='warn'; txt='Degraded'; }
-          }
-          s.elStat.classList.remove('ok','warn','danger'); s.elStat.classList.add(cls);
-          s.elStatTxt.textContent = txt;
+          s.elStat.classList.remove('ok','warn','danger');
+          s.elStat.classList.add('ok');
+          s.elStatTxt.textContent = 'Operational';
         }
 
         function tick(){
@@ -553,7 +545,7 @@
           s.ping = s.basePing + Math.random() * 12 - 6 + loadImpact;
           s.ping = clamp(s.ping, 35, 95);
           
-          // Load: Heavy baseline 1.2-2.5 range (40-80% CPU usage equivalent)
+          // Load: Heavy baseline 1.2-2.5 range
           const targetLoad = 1.2 + (trafficMultiplier * 0.8) + loadWave + burst;
           s.load += (targetLoad - s.load) * 0.18;
           s.load = clamp(s.load, 1.1, 2.6);
@@ -569,7 +561,11 @@
           }
 
           s.elPing.textContent = Math.round(s.ping);
-          s.elLoad.textContent = fmt(s.load, 2);
+
+          // ✅ Show only a percentage for load (e.g., 1.72 -> 72%)
+          const pct = Math.round((s.load - Math.floor(s.load)) * 100);
+          s.elLoad.textContent = pct + '%';
+
           const upTxt = fmt(s.uptime, 2) + '%';
           s.elUp1.textContent = upTxt; s.elUp2.textContent = upTxt;
           s.elBar.style.width = fmt(s.uptime, 2) + '%';
@@ -581,8 +577,8 @@
         return setInterval(tick, 800);
       }
 
-      initServer(document.getElementById('srvA'), { ping:55, load:1.78, uptime:99.97 });
-      initServer(document.getElementById('srvB'), { ping:61, load:1.92, uptime:99.91 });
+      initServer(document.getElementById('srvA'), { ping:52, load:64, uptime:99.97 });
+      initServer(document.getElementById('srvB'), { ping:58, load:68, uptime:99.91 });
     })();
 
     (function(){
@@ -597,9 +593,9 @@
           labels: { 
             style:{ color:'#c0caf5' },
             formatter: function() {
-              // Mountain Time (MT) is UTC-7, convert to 12-hour format
+              // Mountain Time (MT) is UTC-6
               const date = new Date(this.value);
-              const mtTime = new Date(date.getTime() - (7 * 60 * 60 * 1000));
+              const mtTime = new Date(date.getTime() - (6 * 60 * 60 * 1000));
               let hours = mtTime.getUTCHours();
               const minutes = mtTime.getUTCMinutes();
               const seconds = mtTime.getUTCSeconds();
@@ -622,7 +618,7 @@
           style:{ color:'#fff' },
           formatter: function() {
             const date = new Date(this.x);
-            const mtTime = new Date(date.getTime() - (7 * 60 * 60 * 1000));
+            const mtTime = new Date(date.getTime() - (6 * 60 * 60 * 1000));
             let hours = mtTime.getUTCHours();
             const minutes = mtTime.getUTCMinutes();
             const seconds = mtTime.getUTCSeconds();
@@ -650,13 +646,30 @@
         series: [{ name:'Requests', color:'#bb9af7', data:[] }]
       });
 
+      // Randomized spike pattern per page load
+      const spikeInterval = Math.random() * 10000 + 8000; // 8-18 seconds between spikes
+      const spikeIntensity = Math.random() * 50 + 30; // 30-80 extra requests
+      const baseOffset = Math.random() * 30 - 15; // -15 to +15 base adjustment
+      let lastSpikeTime = Date.now() - spikeInterval;
+
       function val(t){
-        // Heavy API usage: 80-200 requests/sec with traffic patterns
-        const base = 120 + 40 * Math.sin(t/4500);
+        // Heavy API usage: 80-200 requests/sec with randomized traffic spikes
+        const base = 120 + baseOffset + 40 * Math.sin(t/4500);
         const wave = 20 * Math.sin(t/2000);
         const jitter = Math.random() * 25;
+        
+        // Random traffic spikes at varied intervals
+        const timeSinceSpike = t - lastSpikeTime;
+        let spike = 0;
+        if(timeSinceSpike > spikeInterval && Math.random() > 0.7) {
+          spike = Math.random() * spikeIntensity;
+          lastSpikeTime = t;
+        }
+        
+        // Occasional random bursts
         const burst = Math.random() > 0.92 ? Math.random() * 35 : 0;
-        return Math.max(80, base + wave + jitter + burst);
+        
+        return Math.max(80, base + wave + jitter + burst + spike);
       }
       
       function tick(){
