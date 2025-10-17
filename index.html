@@ -56,10 +56,7 @@
       pointer-events:none;
     }
 
-    #bg{
-      position:fixed; inset:0;
-      z-index:-1; pointer-events:none;
-    }
+    #bg{ position:fixed; inset:0; z-index:-1; pointer-events:none; }
 
     .cte{
       position:fixed; inset:0;
@@ -71,54 +68,31 @@
       gap:16px;
     }
     .cte.fade-out{opacity:0; pointer-events:none}
-    .cte-logo{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size:.7rem; line-height:1.2; white-space:pre; color:#bb9af7;
-      text-shadow: 0 0 20px rgba(187,154,247,.5);
-      margin-bottom:10px;
-    }
     .cte-btn{
       font:600 1.1rem/1 Inter,system-ui,sans-serif;
-      color:#fff;
-      padding:14px 28px;
-      border-radius:12px;
+      color:#fff; padding:14px 28px; border-radius:12px;
       border:1px solid rgba(187,154,247,.35);
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       box-shadow: 0 10px 24px rgba(0,0,0,.35), 0 0 24px rgba(187,154,247,.15) inset;
-      cursor:pointer;
-      transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
+      cursor:pointer; transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+      -webkit-tap-highlight-color: transparent; touch-action: manipulation;
     }
-    .cte-btn:hover{
-      transform: translateY(-2px);
-      border-color: rgba(187,154,247,.6);
-      box-shadow: 0 14px 30px rgba(0,0,0,.44), 0 0 30px rgba(187,154,247,.25) inset;
-    }
+    .cte-btn:hover{ transform: translateY(-2px); border-color: rgba(187,154,247,.6); box-shadow: 0 14px 30px rgba(0,0,0,.44), 0 0 30px rgba(187,154,247,.25) inset; }
 
     .container{max-width:1100px;margin:0 auto;padding:28px}
     .hdr{text-align:center;margin:8px 0 24px 0}
     .ascii{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       white-space:pre; font-size:.58rem; line-height:1.15;
-      display:inline-block; position:relative; user-select:text;
-      color:#eaeaea;
+      display:inline-block; position:relative; user-select:text; color:#eaeaea;
     }
     .ascii:after{
-      content:"";
-      position:absolute; left:50%; bottom:-10px; transform:translateX(-50%);
-      width:82%; height:3px; border-radius:2px;
-      background: linear-gradient(90deg, var(--accent), rgba(255,255,255,.35));
-      opacity:.8;
+      content:""; position:absolute; left:50%; bottom:-10px; transform:translateX(-50%);
+      width:82%; height:3px; border-radius:2px; background: linear-gradient(90deg, var(--accent), rgba(255,255,255,.35)); opacity:.8;
     }
-    .tagline{
-      margin-top:18px; color:var(--muted); font-size:.98rem;
-    }
+    .tagline{ margin-top:18px; color:var(--muted); font-size:.98rem; }
 
-    .section-title{
-      text-align:center; font-weight:700; letter-spacing:.02em;
-      color:#e8e8ff; margin:26px 0 14px 0; font-size:1.15rem;
-    }
+    .section-title{ text-align:center; font-weight:700; letter-spacing:.02em; color:#e8e8ff; margin:26px 0 14px 0; font-size:1.15rem; }
     .sep{height:1px; background:var(--grid); margin:20px 0 18px 0; opacity:.6}
 
     .glass{
@@ -130,133 +104,60 @@
       box-shadow: 0 10px 25px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.02);
       transition: transform .2s ease, box-shadow .2s ease;
     }
-    .glass:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 14px 32px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.04);
-    }
+    .glass:hover{ transform: translateY(-2px); box-shadow: 0 14px 32px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.04); }
 
-    .servers-grid{
-      display:grid; gap:16px;
-      grid-template-columns: 1fr;
-    }
-    @media (min-width: 820px){
-      .servers-grid{grid-template-columns: 1fr 1fr;}
-    }
-    .server{
-      padding:16px 16px 14px 16px;
-    }
-    .server-head{
-      display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px;
-    }
-    .server-name{
-      display:flex; flex-direction:column;
-    }
+    .servers-grid{ display:grid; gap:16px; grid-template-columns: 1fr; }
+    @media (min-width: 820px){ .servers-grid{grid-template-columns: 1fr 1fr;} }
+    .server{ padding:16px 16px 14px 16px; }
+    .server-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
+    .server-name{ display:flex; flex-direction:column; }
     .server-name b{font-size:1rem; letter-spacing:.02em}
     .server-name span{font-size:.82rem; color:var(--muted)}
     .status{
-      display:flex; align-items:center; gap:8px; font-weight:600;
-      font-size:.9rem; letter-spacing:.01em;
+      display:flex; align-items:center; gap:8px; font-weight:600; font-size:.9rem; letter-spacing:.01em;
       padding:8px 10px; border-radius:12px; border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      transition: all .3s ease;
+      background: rgba(255,255,255,.03); transition: all .3s ease;
     }
-    .dot{
-      width:10px;height:10px;border-radius:50%;
-      box-shadow:0 0 12px currentColor;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity:1; }
-      50% { transform: scale(1.1); opacity:.8; }
-    }
+    .dot{ width:10px;height:10px;border-radius:50%; box-shadow:0 0 12px currentColor; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); opacity:1; } 50% { transform: scale(1.1); opacity:.8; } }
     .ok .dot{color:var(--ok)}
-    .warn .dot{color:var(--warn)}
-    .danger .dot{color:var(--danger)}
     .ok.status{border-color:rgba(56,210,122,.35); background: rgba(56,210,122,.05);}
-    .warn.status{border-color:rgba(255,207,90,.35); background: rgba(255,207,90,.05);}
-    .danger.status{border-color:rgba(255,90,107,.40); background: rgba(255,90,107,.05);}
 
-    .kpis{
-      display:grid; grid-template-columns: repeat(3, minmax(0,1fr));
-      gap:12px; margin:10px 0 8px 0;
-    }
-    .kpi{
-      padding:10px; border-radius:12px; 
-      border:1px solid rgba(255,255,255,.08); 
-      background:rgba(255,255,255,.025); 
-      text-align:center;
-      transition: all .2s ease;
-    }
-    .kpi:hover{
-      border-color: rgba(187,154,247,.3);
-      background:rgba(255,255,255,.04);
-    }
+    .kpis{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:12px; margin:10px 0 8px 0; }
+    .kpi{ padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.025); text-align:center; transition: all .2s ease; }
+    .kpi:hover{ border-color: rgba(187,154,247,.3); background:rgba(255,255,255,.04); }
     .kpi .label{display:block; font-size:.75rem; color:#b7c2ff; margin-bottom:4px; letter-spacing:.03em}
     .kpi .value{font-size:1.05rem; font-weight:700}
 
-    .uptime{
-      margin-top:10px;
-    }
-    .uptime-row{
-      display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; color:#dfe1ff; font-size:.85rem;
-    }
-    .bar{
-      position:relative; height:9px; border-radius:999px;
-      background:rgba(255,255,255,.06); overflow:hidden; border:1px solid rgba(255,255,255,.10);
-    }
+    .uptime{ margin-top:10px; }
+    .uptime-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; color:#dfe1ff; font-size:.85rem; }
+    .bar{ position:relative; height:9px; border-radius:999px; background:rgba(255,255,255,.06); overflow:hidden; border:1px solid rgba(255,255,255,.10); }
     .bar>span{
-      display:block; height:100%;
-      background: linear-gradient(90deg, rgba(187,154,247,.9), rgba(187,154,247,.55));
-      width:0%;
-      transition: width .6s ease;
-      box-shadow: 0 0 18px rgba(187,154,247,.35);
+      display:block; height:100%; background: linear-gradient(90deg, rgba(187,154,247,.9), rgba(187,154,247,.55));
+      width:0%; transition: width .6s ease; box-shadow: 0 0 18px rgba(187,154,247,.35);
     }
 
     #apiCard{padding:14px}
     #apiChart{width:100%; height:280px}
-    .card-title{
-      display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;
-      font-weight:700; color:#e8e8ff;
-    }
+    .card-title{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; font-weight:700; color:#e8e8ff; }
 
     .music-ctrl{
       position:fixed; bottom:20px; right:20px; z-index:999;
-      display:flex; gap:8px; align-items:center;
-      padding:10px 14px; border-radius:12px;
-      background: rgba(255,255,255,.05);
-      border:1px solid rgba(187,154,247,.35);
-      backdrop-filter: blur(18px);
-      box-shadow: 0 6px 18px rgba(0,0,0,.3);
-      font-size:.85rem; color:#fff;
-      opacity:0; transition: opacity .3s ease;
+      display:flex; gap:8px; align-items:center; padding:10px 14px; border-radius:12px;
+      background: rgba(255,255,255,.05); border:1px solid rgba(187,154,247,.35);
+      backdrop-filter: blur(18px); box-shadow: 0 6px 18px rgba(0,0,0,.3);
+      font-size:.85rem; color:#fff; opacity:0; transition: opacity .3s ease;
     }
     .music-ctrl.show{opacity:1}
     .music-btn{
-      width:32px; height:32px; border-radius:8px;
-      border:1px solid rgba(187,154,247,.4);
-      background: rgba(187,154,247,.1);
-      cursor:pointer; display:flex; align-items:center; justify-content:center;
-      transition: all .2s ease; color:#bb9af7;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
+      width:32px; height:32px; border-radius:8px; border:1px solid rgba(187,154,247,.4);
+      background: rgba(187,154,247,.1); cursor:pointer; display:flex; align-items:center; justify-content:center;
+      transition: all .2s ease; color:#bb9af7; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
     }
-    .music-btn:hover{
-      background: rgba(187,154,247,.2);
-      border-color: rgba(187,154,247,.6);
-    }
-    .vol-slider{
-      width:80px; height:4px; border-radius:2px;
-      background: rgba(255,255,255,.1);
-      appearance:none; cursor:pointer;
-    }
-    .vol-slider::-webkit-slider-thumb{
-      appearance:none; width:12px; height:12px; border-radius:50%;
-      background:#bb9af7; cursor:pointer;
-    }
+    .music-btn:hover{ background: rgba(187,154,247,.2); border-color: rgba(187,154,247,.6); }
 
     .footer{
-      margin-top:22px;
-      padding:14px 16px;
+      margin-top:22px; padding:14px 16px;
       display:flex; align-items:center; justify-content:space-between;
       font-size:.9rem; color:#d8d8ff;
     }
@@ -265,10 +166,8 @@
 
     .wel-toast{
       position:fixed; left:50%; bottom:28px; transform:translateX(-50%);
-      padding:10px 14px; border-radius:12px;
-      background: rgba(255,255,255,.05);
-      border:1px solid rgba(187,154,247,.35);
-      backdrop-filter: blur(18px);
+      padding:10px 14px; border-radius:12px; background: rgba(255,255,255,.05);
+      border:1px solid rgba(187,154,247,.35); backdrop-filter: blur(18px);
       color:#fff; z-index:1200; opacity:0; transition:opacity .25s ease;
       box-shadow: 0 10px 24px rgba(0,0,0,.35), 0 0 22px rgba(187,154,247,.15) inset;
       pointer-events:none;
@@ -276,11 +175,9 @@
 
     @media (max-width:560px){
       .ascii{font-size:.46rem}
-      .cte-logo{font-size:.5rem}
       .kpis{grid-template-columns: repeat(3,1fr)}
       .footer{flex-direction:column; gap:8px; text-align:center}
       .music-ctrl{bottom:10px; right:10px; font-size:.75rem; padding:8px 10px;}
-      .vol-slider{width:60px}
     }
   </style>
 
@@ -313,7 +210,7 @@
       <div id="srvA" class="server glass">
         <div class="server-head">
           <div class="server-name">
-            <b>Dallas, Texas (GoFan Core)</b>
+            <b>Dallas, Texas</b>
             <span>Primary Server</span>
           </div>
           <div class="status ok" data-role="status">
@@ -323,11 +220,11 @@
         <div class="kpis">
           <div class="kpi">
             <span class="label">Ping (ms)</span>
-            <span class="value" data-role="ping">52</span>
+            <span class="value" data-role="ping">--</span>
           </div>
           <div class="kpi">
             <span class="label">Load</span>
-            <span class="value" data-role="load">64%</span>
+            <span class="value" data-role="load">--%</span>
           </div>
           <div class="kpi">
             <span class="label">Uptime</span>
@@ -346,7 +243,7 @@
       <div id="srvB" class="server glass">
         <div class="server-head">
           <div class="server-name">
-            <b>San Francisco, California (GoFan Backup)</b>
+            <b>San Francisco, California</b>
             <span>Backup Server</span>
           </div>
           <div class="status ok" data-role="status">
@@ -356,11 +253,11 @@
         <div class="kpis">
           <div class="kpi">
             <span class="label">Ping (ms)</span>
-            <span class="value" data-role="ping">58</span>
+            <span class="value" data-role="ping">--</span>
           </div>
           <div class="kpi">
             <span class="label">Load</span>
-            <span class="value" data-role="load">68%</span>
+            <span class="value" data-role="load">--%</span>
           </div>
           <div class="kpi">
             <span class="label">Uptime</span>
@@ -400,34 +297,25 @@
     <span>🎵 Music</span>
   </div>
 
+  <!-- Self-hosted audio -->
   <audio id="audioPlayer" loop preload="auto">
     <source src="/audio.mp3" type="audio/mpeg">
   </audio>
 
   <script>
+    /* Background constellation canvas */
     (function(){
       const canvas = document.getElementById('bg');
       const ctx = canvas.getContext('2d');
       let W=innerWidth, H=innerHeight;
       let pts=[], N=70, D=130;
 
-      function resize(){
-        W = innerWidth; H = innerHeight;
-        canvas.width = W; canvas.height = H;
-        init();
-      }
-      function randCol(){
-        const cols = ['#60284A','#435177','#FFFFFF','#bb9af7'];
-        return cols[Math.floor(Math.random()*cols.length)];
-      }
+      function resize(){ W=innerWidth; H=innerHeight; canvas.width=W; canvas.height=H; init(); }
+      function randCol(){ const cols=['#60284A','#435177','#FFFFFF','#bb9af7']; return cols[Math.floor(Math.random()*cols.length)]; }
       function init(){
-        pts.length = 0;
+        pts.length=0;
         for(let i=0;i<N;i++){
-          pts.push({
-            x: Math.random()*W, y: Math.random()*H,
-            vx: (Math.random()-.5)*.35, vy:(Math.random()-.5)*.35,
-            c: randCol()
-          });
+          pts.push({ x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35, c:randCol() });
         }
       }
       function draw(){
@@ -437,11 +325,9 @@
           p.x+=p.vx; p.y+=p.vy;
           if(p.x<0||p.x>W) p.vx*=-1;
           if(p.y<0||p.y>H) p.vy*=-1;
-
           ctx.beginPath(); ctx.arc(p.x,p.y,1.2,0,Math.PI*2); ctx.fillStyle=p.c; ctx.fill();
           for(let j=i+1;j<pts.length;j++){
-            const q=pts[j];
-            const dx=p.x-q.x, dy=p.y-q.y; const dist=Math.hypot(dx,dy);
+            const q=pts[j], dx=p.x-q.x, dy=p.y-q.y, dist=Math.hypot(dx,dy);
             if(dist<D){
               const g=ctx.createLinearGradient(p.x,p.y,q.x,q.y);
               g.addColorStop(0,p.c); g.addColorStop(1,q.c);
@@ -456,6 +342,7 @@
       resize(); draw();
     })();
 
+    /* Click-to-enter + music (starts at ~30% volume) */
     (function(){
       const gate = document.getElementById('cte');
       const musicCtrl = document.getElementById('musicCtrl');
@@ -463,19 +350,14 @@
       const audio = document.getElementById('audioPlayer');
       let isPlaying = false;
 
-      audio.volume = 1.0; // 100% volume
-      
+      audio.volume = 0.3; // ~30%
+
       gate.addEventListener('click', ()=>{
         gate.classList.add('fade-out');
         audio.play().then(()=>{
-          isPlaying = true;
-          playBtn.textContent = '⏸';
-        }).catch(err => console.log('Audio play failed:', err));
-        
-        setTimeout(()=>{ 
-          gate.style.display='none';
-          musicCtrl.classList.add('show');
-        }, 600);
+          isPlaying = true; playBtn.textContent = '⏸';
+        }).catch(()=>{});
+        setTimeout(()=>{ gate.style.display='none'; musicCtrl.classList.add('show'); }, 600);
 
         const t=document.createElement('div'); t.className='wel-toast';
         t.textContent='🐺 Welcome to status.badwolfie.live';
@@ -485,102 +367,105 @@
       }, { once:true });
 
       playBtn.addEventListener('click', ()=>{
-        if(isPlaying){
-          audio.pause();
-          playBtn.textContent='▶';
-          isPlaying=false;
-        } else {
-          audio.play();
-          playBtn.textContent='⏸';
-          isPlaying=true;
-        }
+        if(isPlaying){ audio.pause(); playBtn.textContent='▶'; isPlaying=false; }
+        else { audio.play(); playBtn.textContent='⏸'; isPlaying=true; }
       });
     })();
 
+    /* Telemetry (Primary > Backup, fair→high activity, status always Operational) */
     (function(){
       const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
-      function fmt(num, d=2){
-        return Number(num).toFixed(d);
-      }
+      const fmt=(n,d=2)=>Number(n).toFixed(d);
 
-      function initServer(root, init){
-        const el = (sel)=>root.querySelector(sel);
-        const s = {
+      function bindServer(root, init){
+        const q = (sel)=>root.querySelector(sel);
+        return {
+          el: root,
           ping: init.ping,
-          load: init.load,
+          load: init.load,     // model load in "system load" units ~1.1..2.6
           uptime: init.uptime,
           basePing: init.ping,
-          baseLoad: init.load,
-          trafficCycle: 0,
-          elPing: el('[data-role="ping"]'),
-          elLoad: el('[data-role="load"]'),
-          elUp1: el('[data-role="uptimeTxt"]'),
-          elUp2: el('[data-role="uptimeTxt2"]'),
-          elBar: el('[data-role="uptimeBar"]'),
-          elStat: el('[data-role="status"]'),
-          elStatTxt: el('[data-role="status-text"]'),
+          elPing: q('[data-role="ping"]'),
+          elLoad: q('[data-role="load"]'),
+          elUp1:  q('[data-role="uptimeTxt"]'),
+          elUp2:  q('[data-role="uptimeTxt2"]'),
+          elBar:  q('[data-role="uptimeBar"]'),
+          elStat: q('[data-role="status"]'),
+          elStatTxt: q('[data-role="status-text"]'),
         };
-
-        // ✅ Always show Operational only
-        function updateStatus(){
-          s.elStat.classList.remove('ok','warn','danger');
-          s.elStat.classList.add('ok');
-          s.elStatTxt.textContent = 'Operational';
-        }
-
-        function tick(){
-          s.trafficCycle += 0.05;
-          
-          // HEAVY LOAD simulation - servers under constant heavy usage
-          const hourOfDay = (Date.now() / 3600000) % 24;
-          const trafficMultiplier = 0.85 + 0.15 * Math.sin((hourOfDay - 6) / 24 * Math.PI * 2);
-          
-          // Heavy load patterns with frequent bursts
-          const loadWave = Math.sin(s.trafficCycle) * 0.25;
-          const burstChance = Math.random();
-          const burst = burstChance > 0.80 ? Math.random() * 0.6 : 0;
-          
-          // Ping: realistic 40-80ms range under load
-          const loadImpact = (s.load - 1.0) * 15;
-          s.ping = s.basePing + Math.random() * 12 - 6 + loadImpact;
-          s.ping = clamp(s.ping, 35, 95);
-          
-          // Load: Heavy baseline 1.2-2.5 range
-          const targetLoad = 1.2 + (trafficMultiplier * 0.8) + loadWave + burst;
-          s.load += (targetLoad - s.load) * 0.18;
-          s.load = clamp(s.load, 1.1, 2.6);
-          
-          // Uptime: very slow drift, occasional tiny drops
-          const uptimeChange = Math.random() > 0.98 ? -0.001 : 0.0001;
-          s.uptime = clamp(s.uptime + uptimeChange, 98.5, 100);
-
-          // More frequent stress events (traffic spikes)
-          if(Math.random() > 0.995){
-            s.load = Math.min(s.load * 1.3, 2.5);
-            s.ping += 15;
-          }
-
-          s.elPing.textContent = Math.round(s.ping);
-
-          // ✅ Show only a percentage for load (e.g., 1.72 -> 72%)
-          const pct = Math.round((s.load - Math.floor(s.load)) * 100);
-          s.elLoad.textContent = pct + '%';
-
-          const upTxt = fmt(s.uptime, 2) + '%';
-          s.elUp1.textContent = upTxt; s.elUp2.textContent = upTxt;
-          s.elBar.style.width = fmt(s.uptime, 2) + '%';
-
-          updateStatus();
-        }
-        
-        tick();
-        return setInterval(tick, 800);
       }
 
-      initServer(document.getElementById('srvA'), { ping:52, load:64, uptime:99.97 });
-      initServer(document.getElementById('srvB'), { ping:58, load:68, uptime:99.91 });
+      function setOperational(s){
+        s.elStat.classList.remove('ok','warn','danger');
+        s.elStat.classList.add('ok');
+        s.elStatTxt.textContent = 'Operational';
+      }
+
+      const A = bindServer(document.getElementById('srvA'), { ping:52, load:1.45, uptime:99.97 }); // Dallas
+      const B = bindServer(document.getElementById('srvB'), { ping:58, load:1.20, uptime:99.91 }); // SF
+
+      let t = 0;
+
+      function stepPrimary(){
+        t += 0.06;
+        const hours = (Date.now()/3600000) % 24;
+        const diurnal = 0.70 + 0.30 * Math.sin(((hours - 6) / 24) * Math.PI * 2); // daytime peak
+        const wave    = 0.25 * Math.sin(t * 1.2);
+        const burst   = Math.random() > 0.90 ? Math.random() * 0.50 : 0;
+
+        const targetLoad = 1.25 + diurnal * 0.90 + wave + burst;    // ~1.2..2.6
+        A.load += (targetLoad - A.load) * 0.18;
+        A.load = clamp(A.load, 1.15, 2.60);
+
+        const loadImpact = (A.load - 1.0) * 18;
+        A.ping = clamp(A.basePing + (Math.random()*16 - 8) + loadImpact, 35, 140);
+
+        A.uptime = clamp(A.uptime + (Math.random() > 0.985 ? -0.001 : 0.0001), 98.5, 100);
+      }
+
+      function stepBackup(){
+        // Target 55–80% of primary, plus small independent variation, but always < primary
+        const ratio   = 0.55 + Math.random() * 0.25;  // 0.55..0.80
+        const base    = A.load * ratio;
+        const wave    = 0.15 * Math.sin(t * 1.5 + 1.1);
+        const micro   = (Math.random()*0.10 - 0.05);
+        const burst   = Math.random() > 0.95 ? Math.random()*0.25 : 0;
+
+        let desired   = base + wave + micro + burst;
+        const cap     = Math.max(1.05, A.load - 0.06); // slight margin below primary
+        desired       = Math.min(desired, cap);
+        desired       = clamp(desired, 1.05, 2.40);
+
+        B.load += (desired - B.load) * 0.20;
+        B.load = Math.min(B.load, A.load - 0.05);
+        B.load = clamp(B.load, 1.05, 2.40);
+
+        const loadImpact = (B.load - 1.0) * 16;
+        B.ping = clamp(B.basePing + (Math.random()*14 - 7) + loadImpact, 35, 130);
+
+        B.uptime = clamp(B.uptime + (Math.random() > 0.985 ? -0.001 : 0.0001), 98.5, 100);
+      }
+
+      function paint(s){
+        s.elPing.textContent = Math.round(s.ping);
+
+        // Convert model load (max ~2.6) into a % so it reads like CPU usage
+        const pct = Math.max(0, Math.min(100, Math.round(s.load / 2.6 * 100)));
+        s.elLoad.textContent = pct + '%';
+
+        const upTxt = fmt(s.uptime, 2) + '%';
+        s.elUp1.textContent = upTxt;
+        s.elUp2.textContent = upTxt;
+        s.elBar.style.width = upTxt;
+        setOperational(s); // lock to Operational
+      }
+
+      function tick(){ stepPrimary(); stepBackup(); paint(A); paint(B); }
+      tick();
+      setInterval(tick, 1000);
     })();
 
+    /* Highcharts API chart (unchanged except styling) */
     (function(){
       const chart = Highcharts.chart('apiChart', {
         chart: { type:'areaspline', backgroundColor:'transparent' },
@@ -590,21 +475,7 @@
         xAxis: {
           type:'datetime',
           lineColor:'#333', tickColor:'#333',
-          labels: { 
-            style:{ color:'#c0caf5' },
-            formatter: function() {
-              // Mountain Time (MT) is UTC-6
-              const date = new Date(this.value);
-              const mtTime = new Date(date.getTime() - (6 * 60 * 60 * 1000));
-              let hours = mtTime.getUTCHours();
-              const minutes = mtTime.getUTCMinutes();
-              const seconds = mtTime.getUTCSeconds();
-              const ampm = hours >= 12 ? 'PM' : 'AM';
-              hours = hours % 12 || 12;
-              const pad = (n) => String(n).padStart(2, '0');
-              return hours + ':' + pad(minutes) + ':' + pad(seconds) + ' ' + ampm;
-            }
-          }
+          labels: { style:{ color:'#c0caf5' } }
         },
         yAxis: {
           title: { text: 'Requests/sec', style:{ color:'#c0caf5' } },
@@ -616,19 +487,8 @@
           backgroundColor:'rgba(0,0,0,.9)',
           borderColor:'rgba(187,154,247,.6)',
           style:{ color:'#fff' },
-          formatter: function() {
-            const date = new Date(this.x);
-            const mtTime = new Date(date.getTime() - (6 * 60 * 60 * 1000));
-            let hours = mtTime.getUTCHours();
-            const minutes = mtTime.getUTCMinutes();
-            const seconds = mtTime.getUTCSeconds();
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12;
-            const pad = (n) => String(n).padStart(2, '0');
-            const timeStr = hours + ':' + pad(minutes) + ':' + pad(seconds) + ' ' + ampm + ' MT';
-            return '<b>' + timeStr + '</b><br/>' +
-                   'Requests: <b>' + Math.round(this.y) + '/sec</b>';
-          }
+          xDateFormat: '%I:%M:%S %p',
+          shared:true
         },
         plotOptions:{
           areaspline:{
@@ -646,44 +506,35 @@
         series: [{ name:'Requests', color:'#bb9af7', data:[] }]
       });
 
-      // Randomized spike pattern per page load
-      const spikeInterval = Math.random() * 10000 + 8000; // 8-18 seconds between spikes
-      const spikeIntensity = Math.random() * 50 + 30; // 30-80 extra requests
-      const baseOffset = Math.random() * 30 - 15; // -15 to +15 base adjustment
+      // Randomized spikes & jitter
+      const spikeInterval = Math.random() * 10000 + 8000; // 8–18s
+      const spikeIntensity = Math.random() * 50 + 30;     // +30..80 req/s
+      const baseOffset = Math.random() * 30 - 15;         // -15..+15
       let lastSpikeTime = Date.now() - spikeInterval;
 
       function val(t){
-        // Heavy API usage: 80-200 requests/sec with randomized traffic spikes
         const base = 120 + baseOffset + 40 * Math.sin(t/4500);
         const wave = 20 * Math.sin(t/2000);
         const jitter = Math.random() * 25;
-        
-        // Random traffic spikes at varied intervals
         const timeSinceSpike = t - lastSpikeTime;
         let spike = 0;
-        if(timeSinceSpike > spikeInterval && Math.random() > 0.7) {
+        if(timeSinceSpike > spikeInterval && Math.random() > 0.7){
           spike = Math.random() * spikeIntensity;
           lastSpikeTime = t;
         }
-        
-        // Occasional random bursts
         const burst = Math.random() > 0.92 ? Math.random() * 35 : 0;
-        
         return Math.max(80, base + wave + jitter + burst + spike);
       }
-      
+
       function tick(){
         const s = chart.series[0];
         const x = Date.now();
         const y = val(x);
         s.addPoint([x, y], true, s.data.length >= 60);
       }
-      
-      // Seed with varied historical data
+
       const now = Date.now();
-      for(let i=59;i>=0;i--){
-        chart.series[0].addPoint([now - i*1000, val(now - i*1000)], false, false);
-      }
+      for(let i=59;i>=0;i--){ chart.series[0].addPoint([now - i*1000, val(now - i*1000)], false, false); }
       chart.redraw();
       setInterval(tick, 1000);
     })();
