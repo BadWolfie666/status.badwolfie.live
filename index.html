@@ -199,42 +199,49 @@
     .card-title{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; font-weight:700; color:#ffd699; }
 
     .music-ctrl{
-      position:fixed; bottom:20px; right:20px; z-index:999;
+      position:fixed; bottom:20px; right:20px; z-index:9999;
       display:flex; gap:10px; align-items:center; padding:10px 14px; border-radius:12px;
       background: rgba(255,117,24,.08); border:1px solid rgba(255,117,24,.45);
       backdrop-filter: blur(18px); box-shadow: 0 6px 18px rgba(0,0,0,.4);
       font-size:.85rem; color:#fff8f0; opacity:0; 
       transition: opacity .3s ease;
-      overflow: hidden;
+      overflow: visible;
       white-space: nowrap;
     }
     .music-ctrl.show{opacity:1}
     .music-ctrl.collapsed{
       padding:10px 14px;
     }
-    .music-ctrl > div[style*="width:1px"]{
-      transition: transform .3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity .2s ease, width .3s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    .collapsible-wrapper{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      position: relative;
+    }
+    .music-ctrl > div[style*="width:1px"],
+    .collapsible-wrapper > div[style*="width:1px"]{
+      transition: transform .5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity .4s ease, width .5s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin .5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transform-origin: left center;
     }
-    .music-ctrl.collapsed > div[style*="width:1px"]{
+    .music-ctrl.collapsed .collapsible-wrapper > div[style*="width:1px"]{
       transform: translateX(100%) scaleX(0);
       opacity:0;
       width:0 !important;
       margin:0;
-      transition: transform .8s cubic-bezier(0.23, 1, 0.32, 1), opacity .6s ease, width .8s cubic-bezier(0.23, 1, 0.32, 1), margin .8s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease, width 1.4s cubic-bezier(0.16, 1, 0.3, 1), margin 1.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .music-ctrl .profile-section{
-      transition: transform .3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity .2s ease, max-width .3s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding .3s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    .music-ctrl .profile-section,
+    .collapsible-wrapper .profile-section{
+      transition: transform .5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity .4s ease, max-width .5s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding .5s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin .5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transform-origin: left center;
     }
-    .music-ctrl.collapsed .profile-section{
+    .music-ctrl.collapsed .collapsible-wrapper .profile-section{
       transform: translateX(100%);
       opacity:0;
       max-width:0;
-      overflow:hidden;
       margin:0;
       padding:0;
-      transition: transform .8s cubic-bezier(0.23, 1, 0.32, 1), opacity .6s ease, max-width .8s cubic-bezier(0.23, 1, 0.32, 1), padding .8s cubic-bezier(0.23, 1, 0.32, 1), margin .8s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease, max-width 1.4s cubic-bezier(0.16, 1, 0.3, 1), padding 1.4s cubic-bezier(0.16, 1, 0.3, 1), margin 1.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .music-btn{
       width:32px; height:32px; border-radius:8px; border:1px solid rgba(255,117,24,.5);
@@ -247,6 +254,7 @@
       display:flex; align-items:center; gap:8px; position:relative; cursor:pointer;
       padding:4px 8px 4px 4px; border-radius:20px; transition: all .3s ease;
       border:1px solid transparent;
+      overflow: visible;
     }
     .profile-section:hover{
       background: rgba(255,117,24,.12);
@@ -312,38 +320,53 @@
       text-shadow: 0 1px 3px rgba(0,0,0,.3);
     }
     .profile-tooltip{
-      position:absolute; bottom:calc(100% + 8px); right:0;
-      background: rgba(26,15,10,.96);
-      border:1px solid rgba(255,117,24,.5);
-      border-radius:10px; padding:10px 14px;
+      position:absolute; 
+      bottom:calc(100% + 12px); 
+      left:50%;
+      transform: translateX(-50%) translateY(8px);
+      background: rgba(26,15,10,.98);
+      border:1px solid rgba(255,117,24,.6);
+      border-radius:10px; 
+      padding:12px 16px;
       backdrop-filter: blur(20px);
-      box-shadow: 0 8px 20px rgba(0,0,0,.5), 0 0 20px rgba(255,117,24,.2) inset;
+      box-shadow: 0 8px 24px rgba(0,0,0,.6), 0 0 20px rgba(255,117,24,.25) inset;
       white-space:nowrap;
-      opacity:0; pointer-events:none;
-      transform: translateY(5px);
-      transition: all .3s ease;
-      z-index:1000;
+      opacity:0; 
+      pointer-events:none;
+      transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index:99999;
     }
     .profile-section:hover .profile-tooltip{
       opacity:1;
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
     }
     .music-ctrl.collapsed .profile-tooltip{
       display:none;
     }
     .profile-tooltip::after{
-      content:''; position:absolute; top:100%; right:20px;
-      border:6px solid transparent;
-      border-top-color: rgba(255,117,24,.5);
+      content:''; 
+      position:absolute; 
+      top:100%; 
+      left:50%;
+      transform: translateX(-50%);
+      border:7px solid transparent;
+      border-top-color: rgba(255,117,24,.6);
     }
     .tooltip-title{
-      font-size:.9rem; font-weight:700; color:#ffaa66;
-      margin-bottom:4px;
-      text-shadow: 0 0 8px rgba(255,117,24,.4);
+      font-size:.92rem; 
+      font-weight:700; 
+      color:#ffaa66;
+      margin-bottom:5px;
+      text-shadow: 0 0 10px rgba(255,117,24,.5);
+      text-align: center;
     }
     .tooltip-subtitle{
-      font-size:.75rem; color:#ffcc99;
-      display:flex; align-items:center; gap:4px;
+      font-size:.78rem; 
+      color:#ffcc99;
+      display:flex; 
+      align-items:center; 
+      justify-content: center;
+      gap:4px;
     }
 
     .footer{
@@ -496,19 +519,21 @@
   <div class="music-ctrl" id="musicCtrl">
     <button class="music-btn" id="playBtn" title="Play/Pause">▶</button>
     <span>🎵 Music</span>
-    <div style="width:1px; height:32px; background:rgba(255,165,80,.25); margin:0 4px;"></div>
-    <div class="profile-section">
-      <div class="avatar-wrapper">
-        <img src="./user.png" alt="!YourLocalIndigo" class="profile-avatar" />
-        <img src="./mischievous_kitties_blue.png" alt="" class="avatar-decoration" />
-      </div>
-      <div class="profile-info">
-        <span class="profile-label">Music by</span>
-        <span class="profile-name">!YourLocalIndigo</span>
-      </div>
-      <div class="profile-tooltip">
-        <div class="tooltip-title">🍂 A GoFan Exclusive Member!</div>
-        <div class="tooltip-subtitle">🎃 Member since July 13, 2025</div>
+    <div class="collapsible-wrapper">
+      <div style="width:1px; height:32px; background:rgba(255,165,80,.25); margin:0 4px;"></div>
+      <div class="profile-section">
+        <div class="avatar-wrapper">
+          <img src="./user.png" alt="!YourLocalIndigo" class="profile-avatar" />
+          <img src="./mischievous_kitties_blue.png" alt="" class="avatar-decoration" />
+        </div>
+        <div class="profile-info">
+          <span class="profile-label">Music by</span>
+          <span class="profile-name">!YourLocalIndigo</span>
+        </div>
+        <div class="profile-tooltip">
+          <div class="tooltip-title">🍂 A GoFan Exclusive Member!</div>
+          <div class="tooltip-subtitle">🎃 Member since July 13, 2025</div>
+        </div>
       </div>
     </div>
   </div>
