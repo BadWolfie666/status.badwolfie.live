@@ -690,10 +690,27 @@
         s.elStatTxt.textContent = 'Operational';
       }
 
-      const A = bindServer(document.getElementById('srvA'), { ping:52, load:1.35, uptime:99.97 }); // Dallas - starts at ~52%
-      const B = bindServer(document.getElementById('srvB'), { ping:58, load:0.87, uptime:99.91 }); // SF - starts at ~33%
+      // Randomize initial values on each page load (narrow ranges for realistic variance)
+      const initialPrimaryLoad = 1.30 + Math.random() * 0.20; // Random between 1.30-1.50 (~50-58%) - only 8% variance
+      const initialBackupLoad = 0.85 + Math.random() * 0.04;  // Random between 0.85-0.89 (~33-34%) - only 1.5% variance
+      const initialPrimaryPing = 50 + Math.random() * 4;      // Random between 50-54ms - only 4ms variance
+      const initialBackupPing = 56 + Math.random() * 4;       // Random between 56-60ms - only 4ms variance
+      const initialPrimaryUptime = 99.96 + Math.random() * 0.02; // Random between 99.96-99.98% - tight variance
+      const initialBackupUptime = 99.90 + Math.random() * 0.03;  // Random between 99.90-99.93% - tight variance
 
-      let t = 0;
+      const A = bindServer(document.getElementById('srvA'), { 
+        ping: initialPrimaryPing, 
+        load: initialPrimaryLoad, 
+        uptime: initialPrimaryUptime 
+      }); // Dallas - realistic variation on refresh
+      
+      const B = bindServer(document.getElementById('srvB'), { 
+        ping: initialBackupPing, 
+        load: Math.min(initialBackupLoad, initialPrimaryLoad - 0.15), // Always below primary
+        uptime: initialBackupUptime 
+      }); // SF - realistic variation on refresh
+
+      let t = Math.random() * 100; // Random starting point for wave patterns
 
       function stepPrimary(){
         t += 0.06;
