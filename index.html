@@ -691,10 +691,10 @@
       }
 
       // Randomize initial values on each page load (narrow ranges for realistic variance)
-      const initialPrimaryLoad = 1.30 + Math.random() * 0.20; // Random between 1.30-1.50 (~50-58%) - only 8% variance
+      const initialPrimaryLoad = 1.30 + Math.random() * 0.47; // Random between 1.30-1.77 (~50-68%) - 18% variance
       const initialBackupLoad = 0.85 + Math.random() * 0.04;  // Random between 0.85-0.89 (~33-34%) - only 1.5% variance
       const initialPrimaryPing = 50 + Math.random() * 4;      // Random between 50-54ms - only 4ms variance
-      const initialBackupPing = 56 + Math.random() * 4;       // Random between 56-60ms - only 4ms variance
+      const initialBackupPing = 30 + Math.random() * 8;       // Random between 30-38ms - 8ms variance
       const initialPrimaryUptime = 99.96 + Math.random() * 0.02; // Random between 99.96-99.98% - tight variance
       const initialBackupUptime = 99.90 + Math.random() * 0.03;  // Random between 99.90-99.93% - tight variance
 
@@ -709,6 +709,10 @@
         load: Math.min(initialBackupLoad, initialPrimaryLoad - 0.15), // Always below primary
         uptime: initialBackupUptime 
       }); // SF - realistic variation on refresh
+      
+      // Update base pings to match initial values for proper load-based calculations
+      A.basePing = initialPrimaryPing;
+      B.basePing = initialBackupPing;
 
       let t = Math.random() * 100; // Random starting point for wave patterns
 
@@ -744,7 +748,7 @@
         A.load = clamp(A.load, 1.00, 1.95);
 
         const loadImpact = (A.load - 1.0) * 18;
-        A.ping = clamp(A.basePing + (Math.random()*16 - 8) + loadImpact, 35, 140);
+        A.ping = clamp(A.basePing + (Math.random()*16 - 8) + loadImpact, 40, 120);
 
         A.uptime = clamp(A.uptime + (Math.random() > 0.985 ? -0.001 : 0.0001), 98.5, 100);
       }
@@ -783,7 +787,7 @@
         B.load = clamp(B.load, 0.82, 0.91); // Max 35%
 
         const loadImpact = (B.load - 1.0) * 16;
-        B.ping = clamp(B.basePing + (Math.random()*14 - 7) + loadImpact, 35, 130);
+        B.ping = clamp(B.basePing + (Math.random()*14 - 7) + loadImpact, 25, 100);
 
         B.uptime = clamp(B.uptime + (Math.random() > 0.985 ? -0.001 : 0.0001), 98.5, 100);
       }
