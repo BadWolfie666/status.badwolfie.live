@@ -465,10 +465,11 @@
       setInterval(tick, 1000);
     })();
 
-    /* Highcharts API chart (unchanged except styling) */
+    /* Highcharts API chart with MST timezone */
     (function(){
       const chart = Highcharts.chart('apiChart', {
         chart: { type:'areaspline', backgroundColor:'transparent' },
+        time: { timezoneOffset: 7 * 60 }, // MST (GMT-7)
         title: { text: '', style:{ color:'#fff' } },
         credits: { enabled:false },
         legend: { enabled:false },
