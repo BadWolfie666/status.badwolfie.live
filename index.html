@@ -7,7 +7,7 @@
   <meta property="og:title" content="badwolfie.live — Status" />
   <meta property="og:description" content="Status page for badwolfie.live" />
   <meta property="og:image" content="/favicon.png" />
-  <meta name="theme-color" content="#1a0f0a" />
+  <meta name="theme-color" content="#0a1a0f" />
   <link rel="icon" href="./favicon.png" type="image/png" />
 
   <style>
@@ -22,18 +22,18 @@
 
   <style>
     :root{
-      --bg:#1a0f0a;
-      --glass-bg: rgba(255,140,60,.08);
-      --glass-brd: rgba(255,165,80,.18);
-      --accent:#ff7518;
+      --bg:#0a1612;
+      --glass-bg: rgba(60,180,100,.08);
+      --glass-brd: rgba(80,200,120,.18);
+      --accent:#1e9b4f;
       --text:#fff8f0;
-      --muted:#ffb380;
-      --grid:#4a3020;
+      --muted:#b3f5d1;
+      --grid:#204030;
       --ok:#52c41a;
       --warn:#faad14;
       --danger:#ff4d4f;
-      --leaf-red:#d2042d;
-      --maple:#cc5500;
+      --christmas-red:#c41e3a;
+      --christmas-green:#165e3c;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
@@ -51,39 +51,40 @@
       content:"";
       position:fixed; inset:0;
       background:
-        radial-gradient(1200px 600px at 20% 50%, rgba(255,117,24,.12), transparent 60%),
-        radial-gradient(900px 500px at 80% 20%, rgba(204,85,0,.10), transparent 60%),
-        radial-gradient(800px 800px at 40% 80%, rgba(218,165,32,.08), transparent 60%);
+        radial-gradient(1200px 600px at 20% 50%, rgba(30,155,79,.12), transparent 60%),
+        radial-gradient(900px 500px at 80% 20%, rgba(196,30,58,.10), transparent 60%),
+        radial-gradient(800px 800px at 40% 80%, rgba(220,220,240,.05), transparent 60%);
       z-index:-2;
       pointer-events:none;
     }
 
     #bg{ position:fixed; inset:0; z-index:-1; pointer-events:none; }
 
-    /* Falling leaves animation */
-    .leaf {
+    /* Falling snowflakes animation */
+    .snowflake {
       position: fixed;
       width: 20px;
       height: 20px;
       z-index: -1;
       pointer-events: none;
-      animation: fall linear infinite;
-      opacity: 0.7;
+      animation: snowfall linear infinite;
+      opacity: 0.8;
+      color: #fff;
     }
-    @keyframes fall {
+    @keyframes snowfall {
       0% {
-        transform: translateY(-10vh) rotate(0deg);
-        opacity: 0.7;
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0.8;
       }
       100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0.3;
+        transform: translateY(110vh) translateX(50px) rotate(360deg);
+        opacity: 0.4;
       }
     }
 
     .cte{
       position:fixed; inset:0;
-      background: rgba(26,15,10,.92);
+      background: rgba(10,22,18,.92);
       backdrop-filter: blur(10px);
       display:flex; flex-direction:column; align-items:center; justify-content:center;
       z-index:1000;
@@ -94,47 +95,47 @@
     .cte-btn{
       font:600 1.1rem/1 Inter,system-ui,sans-serif;
       color:#fff8f0; padding:14px 28px; border-radius:12px;
-      border:1px solid rgba(255,117,24,.45);
-      background: linear-gradient(180deg, rgba(255,117,24,.15), rgba(204,85,0,.08));
-      box-shadow: 0 10px 24px rgba(0,0,0,.45), 0 0 24px rgba(255,117,24,.20) inset;
+      border:1px solid rgba(30,155,79,.45);
+      background: linear-gradient(180deg, rgba(30,155,79,.15), rgba(196,30,58,.08));
+      box-shadow: 0 10px 24px rgba(0,0,0,.45), 0 0 24px rgba(30,155,79,.20) inset;
       cursor:pointer; transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
       -webkit-tap-highlight-color: transparent; touch-action: manipulation;
     }
-    .cte-btn:hover{ transform: translateY(-2px); border-color: rgba(255,117,24,.7); box-shadow: 0 14px 30px rgba(0,0,0,.55), 0 0 30px rgba(255,117,24,.35) inset; }
+    .cte-btn:hover{ transform: translateY(-2px); border-color: rgba(30,155,79,.7); box-shadow: 0 14px 30px rgba(0,0,0,.55), 0 0 30px rgba(30,155,79,.35) inset; }
 
     .container{max-width:1100px;margin:0 auto;padding:28px}
     .hdr{text-align:center;margin:8px 0 24px 0; position: relative;}
     .ascii{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       white-space:pre; font-size:.58rem; line-height:1.15;
-      display:inline-block; position:relative; user-select:text; color:#ffb380;
-      text-shadow: 0 0 10px rgba(255,117,24,.3);
+      display:inline-block; position:relative; user-select:text; color:#b3f5d1;
+      text-shadow: 0 0 10px rgba(30,155,79,.3);
     }
     .ascii:after{
       content:""; position:absolute; left:50%; bottom:-10px; transform:translateX(-50%);
       width:82%; height:3px; border-radius:2px; 
-      background: linear-gradient(90deg, var(--accent), rgba(218,165,32,.45)); 
+      background: linear-gradient(90deg, var(--accent), rgba(196,30,58,.45)); 
       opacity:.8;
     }
     .tagline{ margin-top:18px; color:var(--muted); font-size:.98rem; }
 
-    /* Fall decorations */
-    .fall-emoji {
+    /* Christmas decorations */
+    .christmas-emoji {
       position: absolute;
       font-size: 2rem;
       animation: float 3s ease-in-out infinite;
-      opacity: 0.6;
+      opacity: 0.7;
     }
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
     }
-    .fall-emoji:nth-child(1) { top: -20px; left: 5%; animation-delay: 0s; }
-    .fall-emoji:nth-child(2) { top: -15px; right: 5%; animation-delay: 0.5s; }
-    .fall-emoji:nth-child(3) { top: 30px; left: 15%; animation-delay: 1s; font-size: 1.5rem; }
-    .fall-emoji:nth-child(4) { top: 35px; right: 15%; animation-delay: 1.5s; font-size: 1.5rem; }
+    .christmas-emoji:nth-child(1) { top: -20px; left: 5%; animation-delay: 0s; }
+    .christmas-emoji:nth-child(2) { top: -15px; right: 5%; animation-delay: 0.5s; }
+    .christmas-emoji:nth-child(3) { top: 30px; left: 15%; animation-delay: 1s; font-size: 1.5rem; }
+    .christmas-emoji:nth-child(4) { top: 35px; right: 15%; animation-delay: 1.5s; font-size: 1.5rem; }
 
-    .section-title{ text-align:center; font-weight:700; letter-spacing:.02em; color:#ffd699; margin:26px 0 14px 0; font-size:1.15rem; }
+    .section-title{ text-align:center; font-weight:700; letter-spacing:.02em; color:#d4f4dd; margin:26px 0 14px 0; font-size:1.15rem; }
     .sep{height:1px; background:var(--grid); margin:20px 0 18px 0; opacity:.6}
 
     .glass{
@@ -143,13 +144,13 @@
       border-radius:16px;
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 10px 25px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,165,80,.04);
+      box-shadow: 0 10px 25px rgba(0,0,0,.45), inset 0 0 0 1px rgba(80,200,120,.04);
       transition: transform .2s ease, box-shadow .2s ease;
     }
     .glass:hover{ 
       transform: translateY(-2px); 
-      box-shadow: 0 14px 32px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,165,80,.08);
-      border-color: rgba(255,165,80,.25);
+      box-shadow: 0 14px 32px rgba(0,0,0,.55), inset 0 0 0 1px rgba(80,200,120,.08);
+      border-color: rgba(80,200,120,.25);
     }
 
     .servers-grid{ display:grid; gap:16px; grid-template-columns: 1fr; }
@@ -157,12 +158,12 @@
     .server{ padding:16px 16px 14px 16px; }
     .server-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
     .server-name{ display:flex; flex-direction:column; }
-    .server-name b{font-size:1rem; letter-spacing:.02em; color:#ffd699;}
+    .server-name b{font-size:1rem; letter-spacing:.02em; color:#d4f4dd;}
     .server-name span{font-size:.82rem; color:var(--muted)}
     .status{
       display:flex; align-items:center; gap:8px; font-weight:600; font-size:.9rem; letter-spacing:.01em;
-      padding:8px 10px; border-radius:12px; border:1px solid rgba(255,165,80,.15);
-      background: rgba(255,117,24,.05); transition: all .3s ease;
+      padding:8px 10px; border-radius:12px; border:1px solid rgba(80,200,120,.15);
+      background: rgba(30,155,79,.05); transition: all .3s ease;
     }
     .dot{ width:10px;height:10px;border-radius:50%; box-shadow:0 0 12px currentColor; animation: pulse 2s ease-in-out infinite; }
     @keyframes pulse { 0%, 100% { transform: scale(1); opacity:1; } 50% { transform: scale(1.1); opacity:.8; } }
@@ -172,36 +173,36 @@
     .kpis{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:12px; margin:10px 0 8px 0; }
     .kpi{ 
       padding:10px; border-radius:12px; 
-      border:1px solid rgba(255,165,80,.12); 
-      background:rgba(255,117,24,.04); 
+      border:1px solid rgba(80,200,120,.12); 
+      background:rgba(30,155,79,.04); 
       text-align:center; transition: all .2s ease; 
     }
-    .kpi:hover{ border-color: rgba(255,117,24,.35); background:rgba(255,117,24,.08); }
-    .kpi .label{display:block; font-size:.75rem; color:#ffcc99; margin-bottom:4px; letter-spacing:.03em}
-    .kpi .value{font-size:1.05rem; font-weight:700; color:#ffd699;}
+    .kpi:hover{ border-color: rgba(30,155,79,.35); background:rgba(30,155,79,.08); }
+    .kpi .label{display:block; font-size:.75rem; color:#c2ffe6; margin-bottom:4px; letter-spacing:.03em}
+    .kpi .value{font-size:1.05rem; font-weight:700; color:#d4f4dd;}
 
     .uptime{ margin-top:10px; }
-    .uptime-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; color:#ffd699; font-size:.85rem; }
+    .uptime-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; color:#d4f4dd; font-size:.85rem; }
     .bar{ 
       position:relative; height:9px; border-radius:999px; 
-      background:rgba(255,117,24,.08); overflow:hidden; 
-      border:1px solid rgba(255,165,80,.15); 
+      background:rgba(30,155,79,.08); overflow:hidden; 
+      border:1px solid rgba(80,200,120,.15); 
     }
     .bar>span{
       display:block; height:100%; 
-      background: linear-gradient(90deg, rgba(255,117,24,.9), rgba(218,165,32,.7));
+      background: linear-gradient(90deg, rgba(30,155,79,.9), rgba(196,30,58,.7));
       width:0%; transition: width .6s ease; 
-      box-shadow: 0 0 18px rgba(255,117,24,.45);
+      box-shadow: 0 0 18px rgba(30,155,79,.45);
     }
 
     #apiCard{padding:14px}
     #apiChart{width:100%; height:280px}
-    .card-title{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; font-weight:700; color:#ffd699; }
+    .card-title{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; font-weight:700; color:#d4f4dd; }
 
     .music-ctrl{
       position:fixed; bottom:20px; right:20px; z-index:9999;
       display:flex; gap:10px; align-items:center; padding:10px 14px; border-radius:12px;
-      background: rgba(255,117,24,.08); border:1px solid rgba(255,117,24,.45);
+      background: rgba(30,155,79,.08); border:1px solid rgba(30,155,79,.45);
       backdrop-filter: blur(18px); box-shadow: 0 6px 18px rgba(0,0,0,.4);
       font-size:.85rem; color:#fff8f0; opacity:0; 
       transition: opacity .3s ease;
@@ -244,11 +245,11 @@
       transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease, max-width 1.4s cubic-bezier(0.16, 1, 0.3, 1), padding 1.4s cubic-bezier(0.16, 1, 0.3, 1), margin 1.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .music-btn{
-      width:32px; height:32px; border-radius:8px; border:1px solid rgba(255,117,24,.5);
-      background: rgba(255,117,24,.15); cursor:pointer; display:flex; align-items:center; justify-content:center;
-      transition: all .2s ease; color:#ff7518; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+      width:32px; height:32px; border-radius:8px; border:1px solid rgba(30,155,79,.5);
+      background: rgba(30,155,79,.15); cursor:pointer; display:flex; align-items:center; justify-content:center;
+      transition: all .2s ease; color:#1e9b4f; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
     }
-    .music-btn:hover{ background: rgba(255,117,24,.25); border-color: rgba(255,117,24,.7); }
+    .music-btn:hover{ background: rgba(30,155,79,.25); border-color: rgba(30,155,79,.7); }
 
     .profile-section{
       display:flex; align-items:center; gap:8px; position:relative; cursor:pointer;
@@ -257,13 +258,13 @@
       overflow: visible;
     }
     .profile-section:hover{
-      background: rgba(255,117,24,.12);
-      border-color: rgba(255,117,24,.3);
+      background: rgba(30,155,79,.12);
+      border-color: rgba(30,155,79,.3);
     }
     .profile-avatar{
       width:32px; height:32px; border-radius:50%;
-      border:2px solid rgba(255,117,24,.6);
-      box-shadow: 0 0 12px rgba(255,117,24,.4), inset 0 0 8px rgba(255,117,24,.2);
+      border:2px solid rgba(30,155,79,.6);
+      box-shadow: 0 0 12px rgba(30,155,79,.4), inset 0 0 8px rgba(30,155,79,.2);
       object-fit:cover;
       transition: all .3s ease;
       animation: profileGlow 3s ease-in-out infinite;
@@ -292,15 +293,15 @@
     }
     @keyframes profileGlow {
       0%, 100% { 
-        box-shadow: 0 0 12px rgba(255,117,24,.4), inset 0 0 8px rgba(255,117,24,.2);
+        box-shadow: 0 0 12px rgba(30,155,79,.4), inset 0 0 8px rgba(30,155,79,.2);
       }
       50% { 
-        box-shadow: 0 0 18px rgba(255,165,80,.6), inset 0 0 12px rgba(255,117,24,.3);
+        box-shadow: 0 0 18px rgba(80,200,120,.6), inset 0 0 12px rgba(30,155,79,.3);
       }
     }
     .profile-section:hover .profile-avatar{
-      border-color: rgba(255,165,80,.8);
-      box-shadow: 0 0 18px rgba(255,117,24,.6), inset 0 0 12px rgba(255,117,24,.3);
+      border-color: rgba(80,200,120,.8);
+      box-shadow: 0 0 18px rgba(30,155,79,.6), inset 0 0 12px rgba(30,155,79,.3);
       transform: scale(1.05);
       animation: none;
     }
@@ -311,10 +312,10 @@
       display:flex; flex-direction:column; gap:1px;
     }
     .profile-label{
-      font-size:.7rem; color:#ffcc99; letter-spacing:.02em;
+      font-size:.7rem; color:#c2ffe6; letter-spacing:.02em;
     }
     .profile-name{
-      font-size:.88rem; font-weight:700; color:#ffd699;
+      font-size:.88rem; font-weight:700; color:#d4f4dd;
       font-family: 'Segoe UI', system-ui, sans-serif;
       letter-spacing:.01em;
       text-shadow: 0 1px 3px rgba(0,0,0,.3);
@@ -324,12 +325,12 @@
       bottom:calc(100% + 12px); 
       left:50%;
       transform: translateX(-50%) translateY(8px);
-      background: rgba(26,15,10,.98);
-      border:1px solid rgba(255,117,24,.6);
+      background: rgba(10,22,18,.98);
+      border:1px solid rgba(30,155,79,.6);
       border-radius:10px; 
       padding:12px 16px;
       backdrop-filter: blur(20px);
-      box-shadow: 0 8px 24px rgba(0,0,0,.6), 0 0 20px rgba(255,117,24,.25) inset;
+      box-shadow: 0 8px 24px rgba(0,0,0,.6), 0 0 20px rgba(30,155,79,.25) inset;
       white-space:nowrap;
       opacity:0; 
       pointer-events:none;
@@ -350,19 +351,19 @@
       left:50%;
       transform: translateX(-50%);
       border:7px solid transparent;
-      border-top-color: rgba(255,117,24,.6);
+      border-top-color: rgba(30,155,79,.6);
     }
     .tooltip-title{
       font-size:.92rem; 
       font-weight:700; 
-      color:#ffaa66;
+      color:#6fd999;
       margin-bottom:5px;
-      text-shadow: 0 0 10px rgba(255,117,24,.5);
+      text-shadow: 0 0 10px rgba(30,155,79,.5);
       text-align: center;
     }
     .tooltip-subtitle{
       font-size:.78rem; 
-      color:#ffcc99;
+      color:#c2ffe6;
       display:flex; 
       align-items:center; 
       justify-content: center;
@@ -372,17 +373,17 @@
     .footer{
       margin-top:22px; padding:14px 16px;
       display:flex; align-items:center; justify-content:space-between;
-      font-size:.9rem; color:#ffd699;
+      font-size:.9rem; color:#d4f4dd;
     }
     .footer a{color:var(--accent); text-decoration:none; transition: color .2s ease;}
-    .footer a:hover{color:#ffaa66;}
+    .footer a:hover{color:#66ffaa;}
 
     .wel-toast{
       position:fixed; left:50%; bottom:28px; transform:translateX(-50%);
-      padding:10px 14px; border-radius:12px; background: rgba(255,117,24,.08);
-      border:1px solid rgba(255,117,24,.45); backdrop-filter: blur(18px);
+      padding:10px 14px; border-radius:12px; background: rgba(30,155,79,.08);
+      border:1px solid rgba(30,155,79,.45); backdrop-filter: blur(18px);
       color:#fff8f0; z-index:1200; opacity:0; transition:opacity .25s ease;
-      box-shadow: 0 10px 24px rgba(0,0,0,.45), 0 0 22px rgba(255,117,24,.20) inset;
+      box-shadow: 0 10px 24px rgba(0,0,0,.45), 0 0 22px rgba(30,155,79,.20) inset;
       pointer-events:none;
     }
 
@@ -393,10 +394,10 @@
       .music-ctrl{bottom:10px; right:10px; font-size:.75rem; padding:8px 10px; flex-wrap:wrap; max-width:calc(100vw - 20px);}
       .music-ctrl.collapsed{padding:8px 10px;}
       .music-ctrl > div[style*="width:1px"]{display:none;}
-      .profile-section{width:100%; justify-content:center; margin-top:4px; border-top:1px solid rgba(255,165,80,.15); padding-top:8px;}
+      .profile-section{width:100%; justify-content:center; margin-top:4px; border-top:1px solid rgba(80,200,120,.15); padding-top:8px;}
       .profile-name{font-size:.8rem;}
       .profile-label{font-size:.65rem;}
-      .fall-emoji { font-size: 1.5rem; }
+      .christmas-emoji { font-size: 1.5rem; }
     }
   </style>
 
@@ -406,16 +407,16 @@
   <canvas id="bg"></canvas>
 
   <div id="cte" class="cte">
-    <div style="font-size:3rem;margin-bottom:8px">🍂🍁🎃</div>
-    <button class="cte-btn" aria-label="Click to Enter">🍂 Click to Enter 🍂</button>
+    <div style="font-size:3rem;margin-bottom:8px">🎄❄️⛄</div>
+    <button class="cte-btn" aria-label="Click to Enter">🎄 Click to Enter 🎄</button>
   </div>
 
   <div class="container">
     <div class="hdr">
-      <div class="fall-emoji">🍁</div>
-      <div class="fall-emoji">🍂</div>
-      <div class="fall-emoji">🎃</div>
-      <div class="fall-emoji">🌾</div>
+      <div class="christmas-emoji">🎄</div>
+      <div class="christmas-emoji">❄️</div>
+      <div class="christmas-emoji">⛄</div>
+      <div class="christmas-emoji">🎅</div>
       <div class="ascii">
 ██████╗  █████╗ ██████╗ ██╗    ██╗ ██████╗ ██╗    ███████╗██╗███████╗    ██╗     ██╗██╗   ██╗███████╗
 ██╔══██╗██╔══██╗██╔══██╗██║    ██║██╔═══██╗██║    ██╔════╝██║██╔════╝    ██║     ██║██║   ██║██╔════╝
@@ -424,12 +425,12 @@
 ██████╔╝██║  ██║██████╔╝╚███╔███╔╝╚██████╔╝███████╗██║     ██║███████╗    ███████╗██║ ╚████╔╝ ███████╗
 ╚═════╝ ╚═╝  ╚═╝╚═════╝  ╚══╝╚══╝  ╚═════╝ ╚══════╝╚═╝     ╚═╝╚══════╝    ╚══════╝╚═╝  ╚═══╝  ╚══════╝
       </div>
-      <div class="tagline">🍂 Real-time status for <b>badwolfie.live</b> 🍁</div>
+      <div class="tagline">❄️ Real-time status for <b>badwolfie.live</b> 🎄</div>
     </div>
 
     <div class="sep"></div>
 
-    <h2 class="section-title">🍁 Server Infrastructure 🍁</h2>
+    <h2 class="section-title">🎄 Server Infrastructure 🎄</h2>
     <div class="servers-grid">
       <div id="srvA" class="server glass">
         <div class="server-head">
@@ -498,17 +499,17 @@
       </div>
     </div>
 
-    <h2 class="section-title" style="margin-top:22px">🎃 BadWolf API Performance 🎃</h2>
+    <h2 class="section-title" style="margin-top:22px">⛄ BadWolf API Performance ⛄</h2>
     <div id="apiCard" class="glass">
       <div class="card-title">
         <span>Requests per Second</span>
-        <span style="font-size:.85rem;font-weight:400;color:#ffcc99">Live Data</span>
+        <span style="font-size:.85rem;font-weight:400;color:#c2ffe6">Live Data</span>
       </div>
       <div id="apiChart"></div>
     </div>
 
     <div class="footer glass">
-      <div><a href="https://badwolfie.live" target="_blank" rel="noopener" style="text-decoration:none;color:#ffd699">Powered by BadWolfNetworks © 2025</a></div>
+      <div><a href="https://badwolfie.live" target="_blank" rel="noopener" style="text-decoration:none;color:#d4f4dd">Powered by BadWolfNetworks © 2025</a></div>
       <div style="display:flex;gap:12px">
         <a href="https://github.com/udpcat" target="_blank" rel="noopener">Hex (udpcat)</a>
         <a href="https://guns.badwolfie.live" target="_blank" rel="noopener">guns.badwolfie.live</a>
@@ -520,7 +521,7 @@
     <button class="music-btn" id="playBtn" title="Play/Pause">▶</button>
     <span>🎵 Music</span>
     <div class="collapsible-wrapper">
-      <div style="width:1px; height:32px; background:rgba(255,165,80,.25); margin:0 4px;"></div>
+      <div style="width:1px; height:32px; background:rgba(80,200,120,.25); margin:0 4px;"></div>
       <div class="profile-section">
         <div class="avatar-wrapper">
           <img src="assets/images/user.png" alt="!YourLocalIndigo" class="profile-avatar" />
@@ -531,8 +532,8 @@
           <span class="profile-name">!YourLocalIndigo</span>
         </div>
         <div class="profile-tooltip">
-          <div class="tooltip-title">🍂 A GoFan Exclusive Member!</div>
-          <div class="tooltip-subtitle">🎃 Member since July 13, 2025</div>
+          <div class="tooltip-title">❄️ A GoFan Exclusive Member!</div>
+          <div class="tooltip-subtitle">🎄 Member since July 13, 2025</div>
         </div>
       </div>
     </div>
@@ -544,7 +545,7 @@
   </audio>
 
   <script>
-    /* Background constellation canvas with fall colors */
+    /* Background constellation canvas with Christmas colors */
     (function(){
       const canvas = document.getElementById('bg');
       const ctx = canvas.getContext('2d');
@@ -553,7 +554,7 @@
 
       function resize(){ W=innerWidth; H=innerHeight; canvas.width=W; canvas.height=H; init(); }
       function randCol(){ 
-        const cols=['#ff7518','#d2691e','#daa520','#cc5500','#ffb380']; 
+        const cols=['#1e9b4f','#c41e3a','#dcdcf0','#165e3c','#b3f5d1']; 
         return cols[Math.floor(Math.random()*cols.length)]; 
       }
       function init(){
@@ -586,30 +587,31 @@
       resize(); draw();
     })();
 
-    /* Falling leaves */
+    /* Falling snowflakes */
     (function(){
-      const leaves = ['🍁', '🍂', '🍃'];
+      const snowflakes = ['❄', '❅', '❆'];
       const container = document.body;
       
-      function createLeaf() {
-        const leaf = document.createElement('div');
-        leaf.className = 'leaf';
-        leaf.textContent = leaves[Math.floor(Math.random() * leaves.length)];
-        leaf.style.left = Math.random() * 100 + 'vw';
-        leaf.style.animationDuration = (Math.random() * 10 + 15) + 's';
-        leaf.style.animationDelay = Math.random() * 5 + 's';
-        container.appendChild(leaf);
+      function createSnowflake() {
+        const flake = document.createElement('div');
+        flake.className = 'snowflake';
+        flake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+        flake.style.left = Math.random() * 100 + 'vw';
+        flake.style.fontSize = (Math.random() * 10 + 12) + 'px';
+        flake.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        flake.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(flake);
         
-        setTimeout(() => leaf.remove(), 25000);
+        setTimeout(() => flake.remove(), 25000);
       }
       
-      // Create initial leaves
-      for(let i = 0; i < 8; i++) {
-        setTimeout(createLeaf, i * 2000);
+      // Create initial snowflakes
+      for(let i = 0; i < 12; i++) {
+        setTimeout(createSnowflake, i * 1500);
       }
       
-      // Continuously add new leaves
-      setInterval(createLeaf, 3000);
+      // Continuously add new snowflakes
+      setInterval(createSnowflake, 2500);
     })();
 
     /* Click-to-enter + music (starts at ~30% volume) */
@@ -630,7 +632,7 @@
         setTimeout(()=>{ gate.style.display='none'; musicCtrl.classList.add('show'); }, 600);
 
         const t=document.createElement('div'); t.className='wel-toast';
-        t.textContent='🍁 Welcome to status.badwolfie.live - Happy Fall! 🎃';
+        t.textContent='🎄 Welcome to status.badwolfie.live - Happy Holidays! ❄️';
         document.body.appendChild(t);
         requestAnimationFrame(()=> t.style.opacity='1');
         setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(), 250); }, 2500);
@@ -671,7 +673,7 @@
         return {
           el: root,
           ping: init.ping,
-          load: init.load,     // model load in "system load" units ~1.1..2.6
+          load: init.load,
           uptime: init.uptime,
           basePing: init.ping,
           elPing: q('[data-role="ping"]'),
@@ -690,60 +692,49 @@
         s.elStatTxt.textContent = 'Operational';
       }
 
-      // Randomize initial values on each page load (narrow ranges for realistic variance)
-      const initialPrimaryLoad = 1.30 + Math.random() * 0.47; // Random between 1.30-1.77 (~50-68%) - 18% variance
-      const initialBackupLoad = 0.85 + Math.random() * 0.04;  // Random between 0.85-0.89 (~33-34%) - only 1.5% variance
-      const initialPrimaryPing = 50 + Math.random() * 4;      // Random between 50-54ms - only 4ms variance
-      const initialBackupPing = 30 + Math.random() * 8;       // Random between 30-38ms - 8ms variance
-      const initialPrimaryUptime = 99.96 + Math.random() * 0.02; // Random between 99.96-99.98% - tight variance
-      const initialBackupUptime = 99.90 + Math.random() * 0.03;  // Random between 99.90-99.93% - tight variance
+      // Randomize initial values on each page load
+      const initialPrimaryLoad = 1.30 + Math.random() * 0.47;
+      const initialBackupLoad = 0.85 + Math.random() * 0.04;
+      const initialPrimaryPing = 50 + Math.random() * 4;
+      const initialBackupPing = 30 + Math.random() * 8;
+      const initialPrimaryUptime = 99.96 + Math.random() * 0.02;
+      const initialBackupUptime = 99.90 + Math.random() * 0.03;
 
       const A = bindServer(document.getElementById('srvA'), { 
         ping: initialPrimaryPing, 
         load: initialPrimaryLoad, 
         uptime: initialPrimaryUptime 
-      }); // Dallas - realistic variation on refresh
+      });
       
       const B = bindServer(document.getElementById('srvB'), { 
         ping: initialBackupPing, 
-        load: Math.min(initialBackupLoad, initialPrimaryLoad - 0.15), // Always below primary
+        load: Math.min(initialBackupLoad, initialPrimaryLoad - 0.15),
         uptime: initialBackupUptime 
-      }); // SF - realistic variation on refresh
+      });
       
-      // Update base pings to match initial values for proper load-based calculations
       A.basePing = initialPrimaryPing;
       B.basePing = initialBackupPing;
 
-      let t = Math.random() * 100; // Random starting point for wave patterns
+      let t = Math.random() * 100;
 
       function stepPrimary(){
         t += 0.06;
         const hours = (Date.now()/3600000) % 24;
         
-        // Time-of-day patterns (rush hours vs quiet periods)
         let timeMultiplier = 1.0;
-        if(hours >= 8 && hours < 12) timeMultiplier = 1.3; // Morning rush
-        else if(hours >= 12 && hours < 14) timeMultiplier = 1.2; // Lunch
-        else if(hours >= 17 && hours < 22) timeMultiplier = 1.4; // Evening peak
-        else if(hours >= 0 && hours < 6) timeMultiplier = 0.6; // Late night quiet
+        if(hours >= 8 && hours < 12) timeMultiplier = 1.3;
+        else if(hours >= 12 && hours < 14) timeMultiplier = 1.2;
+        else if(hours >= 17 && hours < 22) timeMultiplier = 1.4;
+        else if(hours >= 0 && hours < 6) timeMultiplier = 0.6;
         
-        // Random user activity (users joining/leaving)
-        const userChange = (Math.random() - 0.5) * 0.25; // Random ±0.125
-        
-        // Occasional spikes (sudden user influx)
+        const userChange = (Math.random() - 0.5) * 0.25;
         const spike = Math.random() > 0.93 ? Math.random() * 0.30 : 0;
-        
-        // Occasional drops (users leaving)
         const drop = Math.random() > 0.95 ? -Math.random() * 0.20 : 0;
-        
-        // Natural wave pattern
         const wave = 0.15 * Math.sin(t * 0.8);
         
-        // Base load with time-based variation
         const baseLoad = 1.20;
         const targetLoad = baseLoad + (timeMultiplier - 1.0) * 0.35 + userChange + spike + drop + wave;
         
-        // Smooth transition to target (more responsive to changes)
         A.load += (targetLoad - A.load) * 0.35;
         A.load = clamp(A.load, 1.00, 1.95);
 
@@ -756,35 +747,23 @@
       function stepBackup(){
         const hours = (Date.now()/3600000) % 24;
         
-        // Similar time-of-day patterns but less pronounced
         let timeMultiplier = 0.8;
         if(hours >= 8 && hours < 12) timeMultiplier = 1.0;
         else if(hours >= 12 && hours < 14) timeMultiplier = 0.95;
         else if(hours >= 17 && hours < 22) timeMultiplier = 1.1;
         else if(hours >= 0 && hours < 6) timeMultiplier = 0.6;
         
-        // Random user activity (smaller scale for backup)
         const userChange = (Math.random() - 0.5) * 0.08;
-        
-        // Occasional small spikes
         const spike = Math.random() > 0.96 ? Math.random() * 0.10 : 0;
-        
-        // Occasional drops
         const drop = Math.random() > 0.97 ? -Math.random() * 0.08 : 0;
-        
-        // Natural wave
         const wave = 0.05 * Math.sin(t * 1.2 + 1.5);
         
-        // Base load for backup (much lower)
         const baseLoad = 0.88;
         const targetLoad = baseLoad + (timeMultiplier - 0.8) * 0.06 + userChange + spike + drop + wave;
         
-        // Smooth transition
         B.load += (targetLoad - B.load) * 0.30;
-        
-        // Enforce: always below primary with margin
         B.load = Math.min(B.load, A.load - 0.15);
-        B.load = clamp(B.load, 0.82, 0.91); // Max 35%
+        B.load = clamp(B.load, 0.82, 0.91);
 
         const loadImpact = (B.load - 1.0) * 16;
         B.ping = clamp(B.basePing + (Math.random()*14 - 7) + loadImpact, 25, 100);
@@ -794,16 +773,13 @@
 
       function paint(s){
         s.elPing.textContent = Math.round(s.ping);
-
-        // Convert model load (max ~2.6) into a % so it reads like CPU usage
         const pct = Math.max(0, Math.min(100, Math.round(s.load / 2.6 * 100)));
         s.elLoad.textContent = pct + '%';
-
         const upTxt = fmt(s.uptime, 2) + '%';
         s.elUp1.textContent = upTxt;
         s.elUp2.textContent = upTxt;
         s.elBar.style.width = upTxt;
-        setOperational(s); // lock to Operational
+        setOperational(s);
       }
 
       function tick(){ stepPrimary(); stepBackup(); paint(A); paint(B); }
@@ -811,28 +787,28 @@
       setInterval(tick, 1000);
     })();
 
-    /* Highcharts API chart with MST timezone and fall colors */
+    /* Highcharts API chart with MST timezone and Christmas colors */
     (function(){
       const chart = Highcharts.chart('apiChart', {
         chart: { type:'areaspline', backgroundColor:'transparent' },
-        time: { timezoneOffset: 7 * 60 }, // MST (GMT-7)
+        time: { timezoneOffset: 7 * 60 },
         title: { text: '', style:{ color:'#fff8f0' } },
         credits: { enabled:false },
         legend: { enabled:false },
         xAxis: {
           type:'datetime',
-          lineColor:'#4a3020', tickColor:'#4a3020',
-          labels: { style:{ color:'#ffb380' } }
+          lineColor:'#204030', tickColor:'#204030',
+          labels: { style:{ color:'#b3f5d1' } }
         },
         yAxis: {
-          title: { text: 'Requests/sec', style:{ color:'#ffb380' } },
-          gridLineColor:'#4a3020',
-          labels: { style:{ color:'#ffb380' } },
+          title: { text: 'Requests/sec', style:{ color:'#b3f5d1' } },
+          gridLineColor:'#204030',
+          labels: { style:{ color:'#b3f5d1' } },
           min:0
         },
         tooltip: {
-          backgroundColor:'rgba(26,15,10,.95)',
-          borderColor:'rgba(255,117,24,.6)',
+          backgroundColor:'rgba(10,22,18,.95)',
+          borderColor:'rgba(30,155,79,.6)',
           style:{ color:'#fff8f0' },
           xDateFormat: '%I:%M:%S %p',
           shared:true
@@ -842,21 +818,20 @@
             fillColor: {
               linearGradient: { x1:0, y1:0, x2:0, y2:1 },
               stops: [
-                [0, 'rgba(255,117,24,.5)'],
-                [1, 'rgba(218,165,32,.08)']
+                [0, 'rgba(30,155,79,.5)'],
+                [1, 'rgba(196,30,58,.08)']
               ]
             },
             lineWidth:2,
             marker:{ enabled:false }
           }
         },
-        series: [{ name:'Requests', color:'#ff7518', data:[] }]
+        series: [{ name:'Requests', color:'#1e9b4f', data:[] }]
       });
 
-      // Randomized spikes & jitter
-      const spikeInterval = Math.random() * 10000 + 8000; // 8–18s
-      const spikeIntensity = Math.random() * 50 + 30;     // +30..80 req/s
-      const baseOffset = Math.random() * 30 - 15;         // -15..+15
+      const spikeInterval = Math.random() * 10000 + 8000;
+      const spikeIntensity = Math.random() * 50 + 30;
+      const baseOffset = Math.random() * 30 - 15;
       let lastSpikeTime = Date.now() - spikeInterval;
 
       function val(t){
