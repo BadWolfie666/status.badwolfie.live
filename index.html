@@ -199,6 +199,57 @@
     #apiChart{width:100%; height:280px}
     .card-title{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; font-weight:700; color:#d4f4dd; }
 
+    /* Sponsor Carousel */
+    .sponsors-section{
+      margin-top:28px;
+      padding:20px 16px;
+    }
+    .sponsors-title{
+      text-align:center;
+      font-weight:700;
+      font-size:1.1rem;
+      color:#d4f4dd;
+      margin-bottom:20px;
+      letter-spacing:.02em;
+    }
+    .carousel-container{
+      position:relative;
+      overflow:hidden;
+      width:100%;
+      padding:10px 0;
+    }
+    .carousel-track{
+      display:flex;
+      animation:scroll 30s linear infinite;
+      gap:40px;
+    }
+    .carousel-track:hover{
+      animation-play-state:paused;
+    }
+    .sponsor-logo{
+      flex-shrink:0;
+      height:60px;
+      width:auto;
+      max-width:180px;
+      object-fit:contain;
+      filter:brightness(0.9) grayscale(0.2);
+      transition:all .3s ease;
+      opacity:0.85;
+    }
+    .sponsor-logo:hover{
+      filter:brightness(1.1) grayscale(0);
+      opacity:1;
+      transform:scale(1.08);
+    }
+    @keyframes scroll{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-50%)}
+    }
+    @media (max-width:560px){
+      .sponsor-logo{height:45px;max-width:140px;}
+      .carousel-track{gap:30px;}
+    }
+
     .music-ctrl{
       position:fixed; bottom:20px; right:20px; z-index:9999;
       display:flex; gap:10px; align-items:center; padding:10px 14px; border-radius:12px;
@@ -506,6 +557,41 @@
         <span style="font-size:.85rem;font-weight:400;color:#c2ffe6">Live Data</span>
       </div>
       <div id="apiChart"></div>
+    </div>
+
+    <div class="sponsors-section glass">
+      <h3 class="sponsors-title">🎁 Made Possible By 🎁</h3>
+      <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
+          <img src="assets/brand images/jackrabbit.png" alt="Jackrabbit" class="sponsor-logo">
+          <img src="assets/brand images/obs.png" alt="OBS" class="sponsor-logo">
+          <img src="assets/brand images/playon.png" alt="PlayOn" class="sponsor-logo">
+          <img src="assets/brand images/salesforce.png" alt="Salesforce" class="sponsor-logo">
+          <img src="assets/brand images/stripe.png" alt="Stripe" class="sponsor-logo">
+          <img src="assets/brand images/verizon.png" alt="Verizon" class="sponsor-logo">
+          <img src="assets/brand images/vmwarevsphere.png" alt="VMware vSphere" class="sponsor-logo">
+          <img src="assets/brand images/observium.png" alt="Observium" class="sponsor-logo">
+          <img src="assets/brand images/adsense.png" alt="AdSense" class="sponsor-logo">
+          <img src="assets/brand images/cloudflair.png" alt="Cloudflare" class="sponsor-logo">
+          <img src="assets/brand images/conterra.png" alt="Conterra" class="sponsor-logo">
+          <img src="assets/brand images/go.png" alt="Go" class="sponsor-logo">
+          <img src="assets/brand images/gofanbanner.png" alt="GoFan" class="sponsor-logo">
+          <!-- Duplicate set for seamless loop -->
+          <img src="assets/brand images/jackrabbit.png" alt="Jackrabbit" class="sponsor-logo">
+          <img src="assets/brand images/obs.png" alt="OBS" class="sponsor-logo">
+          <img src="assets/brand images/playon.png" alt="PlayOn" class="sponsor-logo">
+          <img src="assets/brand images/salesforce.png" alt="Salesforce" class="sponsor-logo">
+          <img src="assets/brand images/stripe.png" alt="Stripe" class="sponsor-logo">
+          <img src="assets/brand images/verizon.png" alt="Verizon" class="sponsor-logo">
+          <img src="assets/brand images/vmwarevsphere.png" alt="VMware vSphere" class="sponsor-logo">
+          <img src="assets/brand images/observium.png" alt="Observium" class="sponsor-logo">
+          <img src="assets/brand images/adsense.png" alt="AdSense" class="sponsor-logo">
+          <img src="assets/brand images/cloudflair.png" alt="Cloudflare" class="sponsor-logo">
+          <img src="assets/brand images/conterra.png" alt="Conterra" class="sponsor-logo">
+          <img src="assets/brand images/go.png" alt="Go" class="sponsor-logo">
+          <img src="assets/brand images/gofanbanner.png" alt="GoFan" class="sponsor-logo">
+        </div>
+      </div>
     </div>
 
     <div class="footer glass">
